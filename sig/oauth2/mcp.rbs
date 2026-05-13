@@ -1,0 +1,201 @@
+module OAuth2
+  module MCP
+    VERSION: String
+
+    class Error < StandardError
+    end
+
+    class ConfigurationError < Error
+    end
+
+    class InvalidToken < Error
+    end
+
+    class TokenClaims
+      attr_reader subject: String?
+      attr_reader scopes: Array[String]
+      attr_reader audience: Array[String]
+      attr_reader issuer: String?
+      attr_reader expires_at: untyped
+      attr_reader raw: Hash[untyped, untyped]
+
+      def self.from_hash: (Hash[untyped, untyped] hash) -> TokenClaims
+      def initialize: (
+        ?subject: String?,
+        ?scopes: Array[String] | String,
+        ?audience: Array[String] | String,
+        **untyped claims
+      ) -> void
+
+      def expired?: (?now: Time) -> bool
+      def scopes_include?: (Array[String] | String required_scopes) -> bool
+      def audience_includes?: (String resource) -> bool
+    end
+
+    class BearerToken
+      AUTHORIZATION_HEADER: String
+
+      def self.extract: (Hash[untyped, untyped] request) -> String?
+    end
+
+    class ScopeMapper
+      attr_reader mapping: Hash[String, Array[String]]
+
+      def initialize: (mapping: Hash[untyped, untyped], ?passthrough: bool) -> void
+      def capabilities_for: (untyped claims_or_scopes) -> Array[String]
+    end
+
+    class JWTValidator
+      attr_reader issuer: String?
+      attr_reader audience: String?
+      attr_reader algorithms: Array[String]
+      attr_reader leeway: Integer
+
+      def initialize: (
+        jwks: Hash[untyped, untyped] | Array[Hash[untyped, untyped]],
+        ?issuer: String?,
+        ?audience: String?,
+        ?algorithms: Array[String],
+        ?leeway: Integer
+      ) -> void
+
+      def call: (String token) -> TokenClaims
+    end
+
+    class OIDCDiscovery
+      WELL_KNOWN_PATH: String
+
+      attr_reader issuer: String
+      attr_reader client: untyped
+
+      def initialize: (issuer: String, ?client: untyped) -> void
+      def configuration: () -> Hash[untyped, untyped]
+      def jwks: () -> Hash[untyped, untyped]
+      def jwt_validator: (audience: String, ?algorithms: Array[String]?, ?leeway: Integer) -> JWTValidator
+    end
+
+    class IntrospectionValidator
+      attr_reader client: untyped
+      attr_reader introspection_url: String
+      attr_reader audience: String?
+      attr_reader issuer: String?
+      attr_reader token_type_hint: String
+
+      def initialize: (
+        client: untyped,
+        introspection_url: String,
+        ?audience: String?,
+        ?issuer: String?,
+        ?token_type_hint: String
+      ) -> void
+
+      def call: (String token) -> TokenClaims
+    end
+
+    class WorkOSAuthKit
+      JWKS_PATH: String
+
+      attr_reader issuer: String
+      attr_reader audience: String
+      attr_reader client: untyped
+      attr_reader algorithms: Array[String]
+      attr_reader leeway: Integer
+
+      def initialize: (
+        audience: String,
+        ?issuer: String?,
+        ?subdomain: String?,
+        ?client: untyped,
+        **untyped options
+      ) -> void
+
+      def call: (String token) -> TokenClaims
+      def jwt_validator: () -> JWTValidator
+      def jwks: () -> Hash[untyped, untyped]
+    end
+
+    class RackMiddleware
+      AUTHORIZATION_ENV_KEY: String
+
+      attr_reader app: untyped
+      attr_reader resource_server: ResourceServer
+      attr_reader scopes: untyped
+
+      def initialize: (untyped app, resource_server: ResourceServer, ?scopes: untyped) -> void
+      def call: (Hash[untyped, untyped] env) -> [Integer, Hash[String, String], Array[String]]
+    end
+
+    class AuthorizationResult
+      attr_reader claims: TokenClaims?
+      attr_reader capabilities: Array[String]
+      attr_reader status: Integer?
+      attr_reader error: String?
+      attr_reader error_description: String?
+      attr_reader required_scopes: Array[String]
+      attr_reader challenge: BearerChallenge?
+
+      def self.allow: (claims: TokenClaims, ?capabilities: Array[String]) -> AuthorizationResult
+      def self.deny: (
+        status: Integer,
+        error: String?,
+        error_description: String?,
+        required_scopes: Array[String],
+        challenge: BearerChallenge
+      ) -> AuthorizationResult
+
+      def initialize: (allowed: bool, **untyped attributes) -> void
+      def allowed?: () -> bool
+      def headers: () -> Hash[String, String]
+    end
+
+    class ResourceServer
+      attr_reader resource_metadata: ProtectedResourceMetadata
+      attr_reader resource_metadata_url: String
+      attr_reader validator: untyped
+      attr_reader scope_mapper: ScopeMapper?
+
+      def initialize: (
+        resource_metadata: ProtectedResourceMetadata,
+        resource_metadata_url: String,
+        validator: untyped,
+        ?scope_mapper: ScopeMapper?,
+        ?require_resource_audience: bool
+      ) -> void
+
+      def authorize: (request: Hash[untyped, untyped], ?scopes: Array[String] | String) -> AuthorizationResult
+    end
+
+    class ProtectedResourceMetadata
+      attr_reader resource: String
+      attr_reader authorization_servers: Array[String]
+      attr_reader scopes_supported: Array[String]
+      attr_reader metadata: Hash[Symbol, untyped]
+
+      def initialize: (
+        resource: String,
+        authorization_servers: Array[String] | String,
+        ?scopes_supported: Array[String] | String,
+        **untyped metadata
+      ) -> void
+
+      def to_h: () -> Hash[Symbol, untyped]
+      def to_json: (*untyped args) -> String
+    end
+
+    class BearerChallenge
+      attr_reader resource_metadata: String
+      attr_reader scope: untyped
+      attr_reader error: String?
+      attr_reader error_description: String?
+
+      def initialize: (
+        resource_metadata: String,
+        ?scope: untyped,
+        ?error: String?,
+        ?error_description: String?
+      ) -> void
+
+      def to_header: () -> String
+    end
+  end
+end
