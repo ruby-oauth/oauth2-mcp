@@ -31,24 +31,27 @@ module OAuth2
         @raw = (claims[:raw] || {}).freeze
       end
 
-      def self.from_hash(hash)
-        new(
-          subject: first_value(hash, :subject, "subject", :sub, "sub"),
-          scopes: first_value(hash, :scopes, "scopes", :scope, "scope") || [],
-          audience: first_value(hash, :audience, "audience", :aud, "aud") || [],
-          issuer: first_value(hash, :issuer, "issuer", :iss, "iss"),
-          expires_at: first_value(hash, :expires_at, "expires_at", :exp, "exp"),
-          raw: hash,
-        )
-      end
-
-      def self.first_value(hash, *keys)
-        keys.each do |key|
-          return hash[key] if hash.key?(key)
+      class << self
+        def from_hash(hash)
+          new(
+            subject: first_value(hash, :subject, "subject", :sub, "sub"),
+            scopes: first_value(hash, :scopes, "scopes", :scope, "scope") || [],
+            audience: first_value(hash, :audience, "audience", :aud, "aud") || [],
+            issuer: first_value(hash, :issuer, "issuer", :iss, "iss"),
+            expires_at: first_value(hash, :expires_at, "expires_at", :exp, "exp"),
+            raw: hash,
+          )
         end
-        nil
+
+        private
+
+        def first_value(hash, *keys)
+          keys.each do |key|
+            return hash[key] if hash.key?(key)
+          end
+          nil
+        end
       end
-      private_class_method :first_value
 
       def expired?(now: Time.now)
         return false unless expires_at
@@ -69,32 +72,34 @@ module OAuth2
     class BearerToken
       AUTHORIZATION_HEADER = "authorization"
 
-      def self.extract(request)
-        header = authorization_header(request)
-        scheme, token = header.to_s.split(/\s+/, 2)
-        return unless scheme&.casecmp("bearer")&.zero?
+      class << self
+        def extract(request)
+          header = authorization_header(request)
+          scheme, token = header.to_s.split(/\s+/, 2)
+          return unless scheme&.casecmp("bearer")&.zero?
 
-        token.to_s.empty? ? nil : token
-      end
-
-      def self.authorization_header(request)
-        headers = request.fetch(:headers, request.fetch("headers", nil)) if request.respond_to?(:fetch)
-        header = header_value(headers, AUTHORIZATION_HEADER)
-        return header if header
-
-        header_value(request, "HTTP_AUTHORIZATION") || header_value(request, "Authorization")
-      end
-
-      def self.header_value(headers, name)
-        return unless headers.respond_to?(:each)
-
-        headers.each do |key, value|
-          return value if key.to_s.casecmp(name).zero?
+          token.to_s.empty? ? nil : token
         end
-        nil
-      end
 
-      private_class_method :authorization_header, :header_value
+        private
+
+        def authorization_header(request)
+          headers = request.fetch(:headers, request.fetch("headers", nil)) if request.respond_to?(:fetch)
+          header = header_value(headers, AUTHORIZATION_HEADER)
+          return header if header
+
+          header_value(request, "HTTP_AUTHORIZATION") || header_value(request, "Authorization")
+        end
+
+        def header_value(headers, name)
+          return unless headers.respond_to?(:each)
+
+          headers.each do |key, value|
+            return value if key.to_s.casecmp(name).zero?
+          end
+          nil
+        end
+      end
     end
 
     # Maps validated OAuth scopes into application capabilities.
@@ -234,7 +239,7 @@ module OAuth2
 
       def introspect(token)
         parsed = fetch_introspection(token)
-        raise InvalidToken, "Token is inactive." unless truthy?(parsed["active"] || parsed[:active])
+        raise InvalidToken, "Token is inactive." unless truthy?(active_value(parsed))
 
         parsed
       end
@@ -252,6 +257,12 @@ module OAuth2
           parse: :json,
           snaky: false,
         }
+      end
+
+      def active_value(parsed)
+        return unless parsed.respond_to?(:key?)
+
+        parsed["active"] || parsed[:active]
       end
 
       def truthy?(value)
@@ -342,19 +353,21 @@ module OAuth2
     class AuthorizationResult
       attr_reader :claims, :capabilities, :status, :error, :error_description, :required_scopes, :challenge
 
-      def self.allow(claims:, capabilities: [])
-        new(allowed: true, claims: claims, capabilities: capabilities)
-      end
+      class << self
+        def allow(claims:, capabilities: [])
+          new(allowed: true, claims: claims, capabilities: capabilities)
+        end
 
-      def self.deny(status:, error:, error_description:, required_scopes:, challenge:)
-        new(
-          allowed: false,
-          status: status,
-          error: error,
-          error_description: error_description,
-          required_scopes: required_scopes,
-          challenge: challenge,
-        )
+        def deny(status:, error:, error_description:, required_scopes:, challenge:)
+          new(
+            allowed: false,
+            status: status,
+            error: error,
+            error_description: error_description,
+            required_scopes: required_scopes,
+            challenge: challenge,
+          )
+        end
       end
 
       def initialize(allowed:, **attributes)

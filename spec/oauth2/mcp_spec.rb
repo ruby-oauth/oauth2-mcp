@@ -34,6 +34,15 @@ RSpec.describe OAuth2::MCP::ProtectedResourceMetadata do
       )
     end.to raise_error(OAuth2::MCP::ConfigurationError, /resource/)
   end
+
+  it "rejects empty authorization server lists" do
+    expect do
+      described_class.new(
+        resource: "https://brain.example.com/mcp",
+        authorization_servers: [],
+      )
+    end.to raise_error(OAuth2::MCP::ConfigurationError, /authorization_servers/)
+  end
 end
 
 RSpec.describe OAuth2::MCP::BearerChallenge do
@@ -71,6 +80,18 @@ RSpec.describe OAuth2::MCP::BearerToken do
 
     expect(token).to be_nil
   end
+
+  it "ignores bearer headers without a token" do
+    token = described_class.extract(headers: {"Authorization" => "Bearer"})
+
+    expect(token).to be_nil
+  end
+
+  it "returns nil for request objects without enumerable headers" do
+    token = described_class.extract(Object.new)
+
+    expect(token).to be_nil
+  end
 end
 
 RSpec.describe OAuth2::MCP::TokenClaims do
@@ -84,6 +105,12 @@ RSpec.describe OAuth2::MCP::TokenClaims do
     expect(claims.subject).to eq("user-1")
     expect(claims.scopes).to eq(%w[memory.read memory.write])
     expect(claims.audience).to eq(["https://brain.example.com/mcp"])
+  end
+
+  it "detects expired claims" do
+    claims = described_class.new(expires_at: Time.now.to_i - 1)
+
+    expect(claims).to be_expired
   end
 end
 
@@ -99,6 +126,14 @@ RSpec.describe OAuth2::MCP::ScopeMapper do
     capabilities = mapper.capabilities_for(%w[memory.read memory.admin unknown.scope])
 
     expect(capabilities).to eq(%w[documents_read memory_repair_scope_binding memory_tombstone])
+  end
+
+  it "passes scopes through when configured" do
+    mapper = described_class.new(mapping: {"memory.read" => "documents_read"}, passthrough: true)
+
+    capabilities = mapper.capabilities_for(%w[memory.read memory.write])
+
+    expect(capabilities).to eq(%w[documents_read memory.write])
   end
 
   it "requires an explicit mapping unless passthrough is enabled" do
@@ -189,6 +224,42 @@ RSpec.describe OAuth2::MCP::OIDCDiscovery do # rubocop:disable Metrics/BlockLeng
     expect(discovery.jwt_validator(audience: "https://brain.example.com/mcp")).to be_a(OAuth2::MCP::JWTValidator)
   end
 
+  it "uses default algorithms when provider metadata omits supported algorithms" do
+    client = instance_double(OAuth2::Client)
+    allow(client).to receive(:request).with(
+      :get,
+      "/.well-known/openid-configuration",
+      parse: :json,
+      snaky: false,
+    ).and_return(
+      "jwks_uri" => "https://auth.example.com/jwks.json",
+    )
+    allow(client).to receive(:request).with(
+      :get,
+      "https://auth.example.com/jwks.json",
+      parse: :json,
+      snaky: false,
+    ).and_return("keys" => [])
+
+    discovery = described_class.new(issuer: "https://auth.example.com/", client: client)
+
+    expect(discovery.jwt_validator(audience: "https://brain.example.com/mcp").algorithms).to eq(["RS256"])
+  end
+
+  it "returns raw provider responses when they cannot be coerced to hashes" do
+    client = instance_double(OAuth2::Client)
+    allow(client).to receive(:request).with(
+      :get,
+      "/.well-known/openid-configuration",
+      parse: :json,
+      snaky: false,
+    ).and_return("not-json")
+
+    discovery = described_class.new(issuer: "https://auth.example.com/", client: client)
+
+    expect(discovery.configuration).to eq("not-json")
+  end
+
   def response(body)
     instance_double(OAuth2::Response, parsed: body)
   end
@@ -225,14 +296,73 @@ RSpec.describe OAuth2::MCP::IntrospectionValidator do # rubocop:disable Metrics/
     expect { validator.call("token-1") }.to raise_error(OAuth2::MCP::InvalidToken, /inactive/)
   end
 
+  it "rejects introspection responses with mismatched audience" do
+    client = introspection_client(
+      "active" => true,
+      "aud" => "https://other.example.com/mcp",
+    )
+    validator = described_class.new(
+      client: client,
+      introspection_url: "https://auth.example.com/oauth2/introspection",
+      audience: "https://brain.example.com/mcp",
+    )
+
+    expect { validator.call("token-1") }.to raise_error(OAuth2::MCP::InvalidToken, /audience/)
+  end
+
+  it "rejects introspection responses with mismatched issuer" do
+    client = introspection_client(
+      active: true,
+      iss: "https://other.example.com",
+    )
+    validator = described_class.new(
+      client: client,
+      introspection_url: "https://auth.example.com/oauth2/introspection",
+      issuer: "https://auth.example.com",
+    )
+
+    expect { validator.call("token-1") }.to raise_error(OAuth2::MCP::InvalidToken, /issuer/)
+  end
+
+  it "accepts raw hash introspection responses" do
+    client = introspection_client(
+      "active" => "true",
+      "sub" => "user-1",
+    )
+    validator = described_class.new(
+      client: client,
+      introspection_url: "https://auth.example.com/oauth2/introspection",
+    )
+
+    expect(validator.call("token-1").subject).to eq("user-1")
+  end
+
+  it "rejects raw non-hash introspection responses as inactive" do
+    client = introspection_client("not-json")
+    validator = described_class.new(
+      client: client,
+      introspection_url: "https://auth.example.com/oauth2/introspection",
+    )
+
+    expect { validator.call("token-1") }.to raise_error(OAuth2::MCP::InvalidToken, /inactive/)
+  end
+
   def introspection_client(body)
     client = instance_double(OAuth2::Client)
     allow(client).to receive(:request).with(
       :post,
       "https://auth.example.com/oauth2/introspection",
       hash_including(parse: :json, snaky: false),
-    ).and_return(response(body))
+    ).and_return(introspection_response(body))
     client
+  end
+
+  def introspection_response(body)
+    if body.is_a?(Hash) && body.key?("active")
+      response(body)
+    else
+      body
+    end
   end
 
   def response(body)
@@ -259,6 +389,57 @@ RSpec.describe OAuth2::MCP::WorkOSAuthKit do
     expect(authkit.issuer).to eq("https://acme.authkit.app")
     expect(authkit.jwks).to eq("keys" => [])
     expect(authkit.jwt_validator).to be_a(OAuth2::MCP::JWTValidator)
+  end
+
+  it "normalizes explicit issuers and accepts raw JWKS responses" do
+    client = instance_double(OAuth2::Client)
+    allow(client).to receive(:request).with(
+      :get,
+      "/oauth2/jwks",
+      parse: :json,
+      snaky: false,
+    ).and_return("keys" => [])
+
+    authkit = described_class.new(
+      issuer: "https://login.example.com/",
+      audience: "https://brain.example.com/mcp",
+      client: client,
+    )
+
+    expect(authkit.issuer).to eq("https://login.example.com")
+    expect(authkit.jwks).to eq("keys" => [])
+  end
+
+  it "delegates token validation through the built JWT validator" do
+    authkit = described_class.new(
+      issuer: "https://login.example.com/",
+      audience: "https://brain.example.com/mcp",
+      client: instance_double(OAuth2::Client),
+    )
+    claims = OAuth2::MCP::TokenClaims.new(subject: "user-1")
+    validator = instance_double(OAuth2::MCP::JWTValidator, call: claims)
+    allow(authkit).to receive(:jwt_validator).and_return(validator)
+
+    expect(authkit.call("token-1")).to be(claims)
+    expect(validator).to have_received(:call).with("token-1")
+  end
+
+  it "returns raw AuthKit JWKS responses when they cannot be coerced to hashes" do
+    client = instance_double(OAuth2::Client)
+    allow(client).to receive(:request).with(
+      :get,
+      "/oauth2/jwks",
+      parse: :json,
+      snaky: false,
+    ).and_return("not-json")
+
+    authkit = described_class.new(
+      issuer: "https://login.example.com/",
+      audience: "https://brain.example.com/mcp",
+      client: client,
+    )
+
+    expect(authkit.jwks).to eq("not-json")
   end
 
   it "requires either an issuer or an AuthKit subdomain" do
@@ -297,6 +478,22 @@ RSpec.describe OAuth2::MCP::RackMiddleware do # rubocop:disable Metrics/BlockLen
     expect(body).to eq([])
   end
 
+  it "computes scopes from the Rack env when scopes are callable" do
+    app = ->(_env) { [200, {}, ["ok"]] }
+    resource_server = instance_double(OAuth2::MCP::ResourceServer)
+    allow(resource_server).to receive(:authorize).and_return(
+      OAuth2::MCP::AuthorizationResult.allow(claims: OAuth2::MCP::TokenClaims.new),
+    )
+    middleware = described_class.new(app, resource_server: resource_server, scopes: ->(env) { [env.fetch("scope")] })
+
+    middleware.call("scope" => "memory.read")
+
+    expect(resource_server).to have_received(:authorize).with(
+      request: hash_including("scope" => "memory.read"),
+      scopes: ["memory.read"],
+    )
+  end
+
   def allowed_server
     result = OAuth2::MCP::AuthorizationResult.allow(
       claims: OAuth2::MCP::TokenClaims.new(subject: "user-1"),
@@ -327,6 +524,14 @@ RSpec.describe OAuth2::MCP::ResourceServer do # rubocop:disable Metrics/BlockLen
   end
 
   let(:metadata_url) { "https://brain.example.com/.well-known/oauth-protected-resource/mcp" }
+
+  it "does not emit challenge headers for allowed results" do
+    result = OAuth2::MCP::AuthorizationResult.allow(
+      claims: OAuth2::MCP::TokenClaims.new(subject: "user-1"),
+    )
+
+    expect(result.headers).to eq({})
+  end
 
   it "allows requests with a valid token, matching audience, and required scopes" do
     server = described_class.new(
@@ -397,12 +602,88 @@ RSpec.describe OAuth2::MCP::ResourceServer do # rubocop:disable Metrics/BlockLen
     expect(result.error).to eq("insufficient_scope")
   end
 
-  def validator(scopes:, audience:)
+  it "rejects expired tokens" do
+    server = described_class.new(
+      resource_metadata: metadata,
+      resource_metadata_url: metadata_url,
+      validator: validator(
+        scopes: %w[memory.read],
+        audience: ["https://brain.example.com/mcp"],
+        expires_at: Time.now.to_i - 1,
+      ),
+    )
+
+    result = server.authorize(
+      request: {headers: {"Authorization" => "Bearer token-1"}},
+      scopes: ["memory.read"],
+    )
+
+    expect(result).not_to be_allowed
+    expect(result.error_description).to eq("Token is expired.")
+  end
+
+  it "allows tokens without resource audience when audience enforcement is disabled" do
+    server = described_class.new(
+      resource_metadata: metadata,
+      resource_metadata_url: metadata_url,
+      validator: validator(scopes: %w[memory.read], audience: ["https://other.example.com/mcp"]),
+      require_resource_audience: false,
+    )
+
+    result = server.authorize(
+      request: {headers: {"Authorization" => "Bearer token-1"}},
+      scopes: ["memory.read"],
+    )
+
+    expect(result).to be_allowed
+    expect(result.capabilities).to eq([])
+  end
+
+  it "normalizes hash claims returned by validate-style validators" do
+    raw_validator = Class.new do
+      def validate(_token)
+        {
+          "sub" => "user-1",
+          "scope" => "memory.read",
+          "aud" => "https://brain.example.com/mcp",
+        }
+      end
+    end.new
+    server = described_class.new(
+      resource_metadata: metadata,
+      resource_metadata_url: metadata_url,
+      validator: raw_validator,
+    )
+
+    result = server.authorize(
+      request: {headers: {"Authorization" => "Bearer token-1"}},
+      scopes: ["memory.read"],
+    )
+
+    expect(result).to be_allowed
+    expect(result.claims.subject).to eq("user-1")
+  end
+
+  it "rejects validators that return no claims" do
+    server = described_class.new(
+      resource_metadata: metadata,
+      resource_metadata_url: metadata_url,
+      validator: ->(_token) {},
+    )
+
+    result = server.authorize(request: {headers: {"Authorization" => "Bearer token-1"}})
+
+    expect(result).not_to be_allowed
+    expect(result.error_description).to eq("Token validator returned no claims.")
+  end
+
+  def validator(scopes:, audience:, expires_at: nil)
     lambda do |_token|
       OAuth2::MCP::TokenClaims.new(
         subject: "user-1",
         scopes: scopes,
         audience: audience,
+        expires_at: expires_at,
       )
     end
   end

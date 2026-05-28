@@ -28,6 +28,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
+- Treated unsupported OAuth introspection response shapes as inactive tokens
+  instead of allowing low-level indexing errors to escape.
+
 ### Security
 
 ## [0.1.0] - 2026-05-13
