@@ -98,7 +98,7 @@ Gem::Specification.new do |spec|
 
   # Utilities
   spec.add_dependency("jwt", ">= 2.7", "< 4.0")
-  spec.add_dependency("oauth2", ">= 2.0", "< 3.0")
+  spec.add_dependency("oauth2", ">= 2.0", "~> 2.0.20")                  # ruby >= 2.2.0
   spec.add_dependency("version_gem", "~> 1.1", ">= 1.1.9")              # ruby >= 2.2.0
 
   # NOTE: It is preferable to list development dependencies in the gemspec due to increased

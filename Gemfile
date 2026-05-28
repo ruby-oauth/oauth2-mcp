@@ -15,16 +15,8 @@ source "https://gem.coop"
 # Include dependencies from oauth2-mcp.gemspec
 gemspec
 
-oauth2_path = File.expand_path("../oauth2", __dir__)
-gem "oauth2", path: oauth2_path if File.directory?(oauth2_path)
-
 # See unlocked_deps appraisal for more details on irb inclusion
 gem "irb", "~> 1.17" # ruby >= 2.7
-gem "rake", "~> 13.0"
-
-gem "rspec", "~> 3.0"
-
-gem "rubocop", "~> 1.21"
 
 git_source(:codeberg) { |repo_name| "https://codeberg.org/#{repo_name}" }
 
