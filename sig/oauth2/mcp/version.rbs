@@ -1,0 +1,8 @@
+module OAuth2
+  module MCP
+    module Version
+      VERSION: String
+    end
+    VERSION: String
+  end
+end

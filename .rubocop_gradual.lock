@@ -1,0 +1,14 @@
+{
+  "lib/oauth2/mcp.rb:444645794": [
+    [34, 7, 460, "Style/ClassMethodsDefinitions: Use `class << self` to define a class method.", 4186413724],
+    [45, 7, 139, "Style/ClassMethodsDefinitions: Use `class << self` to define a class method.", 2806360434],
+    [72, 7, 230, "Style/ClassMethodsDefinitions: Use `class << self` to define a class method.", 2102094800],
+    [80, 7, 340, "Style/ClassMethodsDefinitions: Use `class << self` to define a class method.", 1845462047],
+    [88, 7, 212, "Style/ClassMethodsDefinitions: Use `class << self` to define a class method.", 3246281363],
+    [345, 7, 122, "Style/ClassMethodsDefinitions: Use `class << self` to define a class method.", 2419906468],
+    [349, 7, 313, "Style/ClassMethodsDefinitions: Use `class << self` to define a class method.", 1556604479]
+  ],
+  "spec/oauth2/mcp_spec.rb:898283388": [
+    [3, 1, 26, "RSpec/MultipleDescribes: Do not use multiple top-level example groups - try to nest them.", 2274836666]
+  ]
+}

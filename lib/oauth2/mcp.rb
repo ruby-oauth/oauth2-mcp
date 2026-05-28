@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "version_gem"
+
 require "json"
 require "uri"
 
@@ -36,7 +38,7 @@ module OAuth2
           audience: first_value(hash, :audience, "audience", :aud, "aud") || [],
           issuer: first_value(hash, :issuer, "issuer", :iss, "iss"),
           expires_at: first_value(hash, :expires_at, "expires_at", :exp, "exp"),
-          raw: hash
+          raw: hash,
         )
       end
 
@@ -70,7 +72,7 @@ module OAuth2
       def self.extract(request)
         header = authorization_header(request)
         scheme, token = header.to_s.split(/\s+/, 2)
-        return nil unless scheme&.casecmp("bearer")&.zero?
+        return unless scheme&.casecmp("bearer")&.zero?
 
         token.to_s.empty? ? nil : token
       end
@@ -84,7 +86,7 @@ module OAuth2
       end
 
       def self.header_value(headers, name)
-        return nil unless headers.respond_to?(:each)
+        return unless headers.respond_to?(:each)
 
         headers.each do |key, value|
           return value if key.to_s.casecmp(name).zero?
@@ -155,7 +157,7 @@ module OAuth2
           iss: issuer,
           verify_aud: !audience.nil?,
           aud: audience,
-          leeway: leeway
+          leeway: leeway,
         }
       end
 
@@ -190,7 +192,7 @@ module OAuth2
           issuer: issuer,
           audience: audience,
           algorithms: algorithms || default_algorithms,
-          leeway: leeway
+          leeway: leeway,
         )
       end
 
@@ -246,9 +248,9 @@ module OAuth2
       def request_options(token)
         {
           body: URI.encode_www_form(token: token, token_type_hint: token_type_hint),
-          headers: { "Content-Type" => "application/x-www-form-urlencoded" },
+          headers: {"Content-Type" => "application/x-www-form-urlencoded"},
           parse: :json,
-          snaky: false
+          snaky: false,
         }
       end
 
@@ -281,7 +283,7 @@ module OAuth2
           issuer: issuer,
           audience: audience,
           algorithms: algorithms,
-          leeway: leeway
+          leeway: leeway,
         )
       end
 
@@ -351,7 +353,7 @@ module OAuth2
           error: error,
           error_description: error_description,
           required_scopes: required_scopes,
-          challenge: challenge
+          challenge: challenge,
         )
       end
 
@@ -373,7 +375,7 @@ module OAuth2
       def headers
         return {} unless challenge
 
-        { "WWW-Authenticate" => challenge.to_header }
+        {"WWW-Authenticate" => challenge.to_header}
       end
     end
 
@@ -382,7 +384,7 @@ module OAuth2
       attr_reader :resource_metadata, :resource_metadata_url, :validator, :scope_mapper
 
       def initialize(resource_metadata:, resource_metadata_url:, validator:, scope_mapper: nil,
-                     require_resource_audience: true)
+        require_resource_audience: true)
         @resource_metadata = resource_metadata
         @resource_metadata_url = resource_metadata_url
         @validator = validator
@@ -440,7 +442,7 @@ module OAuth2
           status: 401,
           error: nil,
           error_description: nil,
-          required_scopes: required_scopes
+          required_scopes: required_scopes,
         )
       end
 
@@ -449,7 +451,7 @@ module OAuth2
           status: 401,
           error: "invalid_token",
           error_description: description,
-          required_scopes: required_scopes
+          required_scopes: required_scopes,
         )
       end
 
@@ -458,7 +460,7 @@ module OAuth2
           status: 403,
           error: "insufficient_scope",
           error_description: "Additional scope is required.",
-          required_scopes: required_scopes
+          required_scopes: required_scopes,
         )
       end
 
@@ -468,7 +470,7 @@ module OAuth2
           error: error,
           error_description: error_description,
           required_scopes: required_scopes,
-          challenge: challenge(error: error, error_description: error_description, required_scopes: required_scopes)
+          challenge: challenge(error: error, error_description: error_description, required_scopes: required_scopes),
         )
       end
 
@@ -477,7 +479,7 @@ module OAuth2
           resource_metadata: resource_metadata_url,
           scope: required_scopes,
           error: error,
-          error_description: error_description
+          error_description: error_description,
         )
       end
     end
@@ -501,7 +503,7 @@ module OAuth2
         {
           resource: resource,
           authorization_servers: authorization_servers,
-          scopes_supported: scopes_supported
+          scopes_supported: scopes_supported,
         }.merge(metadata).compact
       end
 
@@ -535,7 +537,7 @@ module OAuth2
           resource_metadata: resource_metadata,
           scope: format_scope(scope),
           error: error,
-          error_description: error_description
+          error_description: error_description,
         }.compact
 
         "Bearer #{parameters.map { |key, value| %(#{key}="#{escape(value)}") }.join(", ")}"
@@ -544,7 +546,7 @@ module OAuth2
       private
 
       def format_scope(value)
-        return nil if value.nil?
+        return if value.nil?
 
         Array(value).map(&:to_s).reject(&:empty?).join(" ")
       end
@@ -554,4 +556,8 @@ module OAuth2
       end
     end
   end
+end
+
+OAuth2::MCP::Version.class_eval do
+  extend VersionGem::Basic
 end

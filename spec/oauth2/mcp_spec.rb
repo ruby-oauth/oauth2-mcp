@@ -2,7 +2,7 @@
 
 RSpec.describe OAuth2::MCP do
   it "has a version number" do
-    expect(described_class::VERSION).not_to be nil
+    expect(described_class::VERSION).not_to be_nil
   end
 
   it "loads on top of the oauth2 gem" do
@@ -15,13 +15,13 @@ RSpec.describe OAuth2::MCP::ProtectedResourceMetadata do
     metadata = described_class.new(
       resource: "https://brain.example.com/mcp/",
       authorization_servers: ["https://auth.example.com/"],
-      scopes_supported: %w[memory.read memory.write]
+      scopes_supported: %w[memory.read memory.write],
     )
 
     expect(metadata.to_h).to eq(
       resource: "https://brain.example.com/mcp",
       authorization_servers: ["https://auth.example.com"],
-      scopes_supported: %w[memory.read memory.write]
+      scopes_supported: %w[memory.read memory.write],
     )
     expect(JSON.parse(metadata.to_json)).to include("resource" => "https://brain.example.com/mcp")
   end
@@ -30,7 +30,7 @@ RSpec.describe OAuth2::MCP::ProtectedResourceMetadata do
     expect do
       described_class.new(
         resource: "http://brain.example.com/mcp",
-        authorization_servers: ["https://auth.example.com"]
+        authorization_servers: ["https://auth.example.com"],
       )
     end.to raise_error(OAuth2::MCP::ConfigurationError, /resource/)
   end
@@ -42,20 +42,20 @@ RSpec.describe OAuth2::MCP::BearerChallenge do
       resource_metadata: "https://brain.example.com/.well-known/oauth-protected-resource/mcp",
       scope: %w[memory.read memory.write],
       error: "insufficient_scope",
-      error_description: "Additional memory scopes are required"
+      error_description: "Additional memory scopes are required",
     ).to_header
 
     expect(header).to eq(
       'Bearer resource_metadata="https://brain.example.com/.well-known/oauth-protected-resource/mcp", ' \
-      'scope="memory.read memory.write", error="insufficient_scope", ' \
-      'error_description="Additional memory scopes are required"'
+        'scope="memory.read memory.write", error="insufficient_scope", ' \
+        'error_description="Additional memory scopes are required"',
     )
   end
 end
 
 RSpec.describe OAuth2::MCP::BearerToken do
   it "extracts bearer tokens from request headers" do
-    token = described_class.extract(headers: { "Authorization" => "Bearer token-1" })
+    token = described_class.extract(headers: {"Authorization" => "Bearer token-1"})
 
     expect(token).to eq("token-1")
   end
@@ -67,7 +67,7 @@ RSpec.describe OAuth2::MCP::BearerToken do
   end
 
   it "ignores non-bearer authorization headers" do
-    token = described_class.extract(headers: { "Authorization" => "Basic abc" })
+    token = described_class.extract(headers: {"Authorization" => "Basic abc"})
 
     expect(token).to be_nil
   end
@@ -78,7 +78,7 @@ RSpec.describe OAuth2::MCP::TokenClaims do
     claims = described_class.from_hash(
       "sub" => "user-1",
       "scope" => "memory.read memory.write",
-      "aud" => "https://brain.example.com/mcp"
+      "aud" => "https://brain.example.com/mcp",
     )
 
     expect(claims.subject).to eq("user-1")
@@ -92,8 +92,8 @@ RSpec.describe OAuth2::MCP::ScopeMapper do
     mapper = described_class.new(
       mapping: {
         "memory.read" => "documents_read",
-        "memory.admin" => %w[memory_repair_scope_binding memory_tombstone]
-      }
+        "memory.admin" => %w[memory_repair_scope_binding memory_tombstone],
+      },
     )
 
     capabilities = mapper.capabilities_for(%w[memory.read memory.admin unknown.scope])
@@ -111,7 +111,7 @@ end
 RSpec.describe OAuth2::MCP::JWTValidator do # rubocop:disable Metrics/BlockLength
   let(:rsa_key) { OpenSSL::PKey::RSA.generate(2048) }
   let(:jwk) { JWT::JWK.new(rsa_key.public_key, kid: "key-1") }
-  let(:jwks) { { "keys" => [jwk.export] } }
+  let(:jwks) { {"keys" => [jwk.export]} }
 
   it "validates JWTs with configured JWKS and returns normalized claims" do
     token = JWT.encode(
@@ -120,17 +120,17 @@ RSpec.describe OAuth2::MCP::JWTValidator do # rubocop:disable Metrics/BlockLengt
         scope: "memory.read",
         aud: "https://brain.example.com/mcp",
         iss: "https://auth.example.com",
-        exp: Time.now.to_i + 60
+        exp: Time.now.to_i + 60,
       },
       rsa_key,
       "RS256",
-      kid: "key-1"
+      kid: "key-1",
     )
 
     claims = described_class.new(
       jwks: jwks,
       issuer: "https://auth.example.com",
-      audience: "https://brain.example.com/mcp"
+      audience: "https://brain.example.com/mcp",
     ).call(token)
 
     expect(claims.subject).to eq("user-1")
@@ -144,17 +144,17 @@ RSpec.describe OAuth2::MCP::JWTValidator do # rubocop:disable Metrics/BlockLengt
         sub: "user-1",
         aud: "https://other.example.com/mcp",
         iss: "https://auth.example.com",
-        exp: Time.now.to_i + 60
+        exp: Time.now.to_i + 60,
       },
       rsa_key,
       "RS256",
-      kid: "key-1"
+      kid: "key-1",
     )
 
     validator = described_class.new(
       jwks: jwks,
       issuer: "https://auth.example.com",
-      audience: "https://brain.example.com/mcp"
+      audience: "https://brain.example.com/mcp",
     )
 
     expect { validator.call(token) }.to raise_error(OAuth2::MCP::InvalidToken)
@@ -168,18 +168,18 @@ RSpec.describe OAuth2::MCP::OIDCDiscovery do # rubocop:disable Metrics/BlockLeng
       :get,
       "/.well-known/openid-configuration",
       parse: :json,
-      snaky: false
+      snaky: false,
     ).and_return(
       response(
         "jwks_uri" => "https://auth.example.com/jwks.json",
-        "id_token_signing_alg_values_supported" => ["RS256"]
-      )
+        "id_token_signing_alg_values_supported" => ["RS256"],
+      ),
     )
     allow(client).to receive(:request).with(
       :get,
       "https://auth.example.com/jwks.json",
       parse: :json,
-      snaky: false
+      snaky: false,
     ).and_return(response("keys" => []))
 
     discovery = described_class.new(issuer: "https://auth.example.com/", client: client)
@@ -201,14 +201,14 @@ RSpec.describe OAuth2::MCP::IntrospectionValidator do # rubocop:disable Metrics/
       "sub" => "user-1",
       "scope" => "memory.read",
       "aud" => "https://brain.example.com/mcp",
-      "iss" => "https://auth.example.com"
+      "iss" => "https://auth.example.com",
     )
 
     claims = described_class.new(
       client: client,
       introspection_url: "https://auth.example.com/oauth2/introspection",
       audience: "https://brain.example.com/mcp",
-      issuer: "https://auth.example.com"
+      issuer: "https://auth.example.com",
     ).call("token-1")
 
     expect(claims.subject).to eq("user-1")
@@ -219,7 +219,7 @@ RSpec.describe OAuth2::MCP::IntrospectionValidator do # rubocop:disable Metrics/
     client = introspection_client("active" => false)
     validator = described_class.new(
       client: client,
-      introspection_url: "https://auth.example.com/oauth2/introspection"
+      introspection_url: "https://auth.example.com/oauth2/introspection",
     )
 
     expect { validator.call("token-1") }.to raise_error(OAuth2::MCP::InvalidToken, /inactive/)
@@ -230,7 +230,7 @@ RSpec.describe OAuth2::MCP::IntrospectionValidator do # rubocop:disable Metrics/
     allow(client).to receive(:request).with(
       :post,
       "https://auth.example.com/oauth2/introspection",
-      hash_including(parse: :json, snaky: false)
+      hash_including(parse: :json, snaky: false),
     ).and_return(response(body))
     client
   end
@@ -247,13 +247,13 @@ RSpec.describe OAuth2::MCP::WorkOSAuthKit do
       :get,
       "/oauth2/jwks",
       parse: :json,
-      snaky: false
+      snaky: false,
     ).and_return(response("keys" => []))
 
     authkit = described_class.new(
       subdomain: "acme",
       audience: "https://brain.example.com/mcp",
-      client: client
+      client: client,
     )
 
     expect(authkit.issuer).to eq("https://acme.authkit.app")
@@ -276,7 +276,7 @@ RSpec.describe OAuth2::MCP::RackMiddleware do # rubocop:disable Metrics/BlockLen
   it "stores authorization results in the Rack env for allowed requests" do
     app = lambda do |env|
       result = env.fetch(OAuth2::MCP::RackMiddleware::AUTHORIZATION_ENV_KEY)
-      [200, { "x-subject" => result.claims.subject }, ["ok"]]
+      [200, {"x-subject" => result.claims.subject}, ["ok"]]
     end
     middleware = described_class.new(app, resource_server: allowed_server, scopes: ["memory.read"])
 
@@ -299,7 +299,7 @@ RSpec.describe OAuth2::MCP::RackMiddleware do # rubocop:disable Metrics/BlockLen
 
   def allowed_server
     result = OAuth2::MCP::AuthorizationResult.allow(
-      claims: OAuth2::MCP::TokenClaims.new(subject: "user-1")
+      claims: OAuth2::MCP::TokenClaims.new(subject: "user-1"),
     )
     instance_double(OAuth2::MCP::ResourceServer, authorize: result)
   end
@@ -311,7 +311,7 @@ RSpec.describe OAuth2::MCP::RackMiddleware do # rubocop:disable Metrics/BlockLen
       error: nil,
       error_description: nil,
       required_scopes: [],
-      challenge: challenge
+      challenge: challenge,
     )
     instance_double(OAuth2::MCP::ResourceServer, authorize: result)
   end
@@ -322,7 +322,7 @@ RSpec.describe OAuth2::MCP::ResourceServer do # rubocop:disable Metrics/BlockLen
     OAuth2::MCP::ProtectedResourceMetadata.new(
       resource: "https://brain.example.com/mcp",
       authorization_servers: ["https://auth.example.com"],
-      scopes_supported: %w[memory.read memory.write]
+      scopes_supported: %w[memory.read memory.write],
     )
   end
 
@@ -333,12 +333,12 @@ RSpec.describe OAuth2::MCP::ResourceServer do # rubocop:disable Metrics/BlockLen
       resource_metadata: metadata,
       resource_metadata_url: metadata_url,
       validator: validator(scopes: %w[memory.read], audience: ["https://brain.example.com/mcp"]),
-      scope_mapper: OAuth2::MCP::ScopeMapper.new(mapping: { "memory.read" => "documents_read" })
+      scope_mapper: OAuth2::MCP::ScopeMapper.new(mapping: {"memory.read" => "documents_read"}),
     )
 
     result = server.authorize(
-      request: { headers: { "Authorization" => "Bearer token-1" } },
-      scopes: ["memory.read"]
+      request: {headers: {"Authorization" => "Bearer token-1"}},
+      scopes: ["memory.read"],
     )
 
     expect(result).to be_allowed
@@ -350,16 +350,16 @@ RSpec.describe OAuth2::MCP::ResourceServer do # rubocop:disable Metrics/BlockLen
     server = described_class.new(
       resource_metadata: metadata,
       resource_metadata_url: metadata_url,
-      validator: validator(scopes: %w[memory.read], audience: ["https://brain.example.com/mcp"])
+      validator: validator(scopes: %w[memory.read], audience: ["https://brain.example.com/mcp"]),
     )
 
-    result = server.authorize(request: { headers: {} }, scopes: ["memory.read"])
+    result = server.authorize(request: {headers: {}}, scopes: ["memory.read"])
 
     expect(result).not_to be_allowed
     expect(result.status).to eq(401)
     expect(result.headers.fetch("WWW-Authenticate")).to eq(
       'Bearer resource_metadata="https://brain.example.com/.well-known/oauth-protected-resource/mcp", ' \
-      'scope="memory.read"'
+        'scope="memory.read"',
     )
   end
 
@@ -367,12 +367,12 @@ RSpec.describe OAuth2::MCP::ResourceServer do # rubocop:disable Metrics/BlockLen
     server = described_class.new(
       resource_metadata: metadata,
       resource_metadata_url: metadata_url,
-      validator: validator(scopes: %w[memory.read], audience: ["https://other.example.com/mcp"])
+      validator: validator(scopes: %w[memory.read], audience: ["https://other.example.com/mcp"]),
     )
 
     result = server.authorize(
-      request: { headers: { "Authorization" => "Bearer token-1" } },
-      scopes: ["memory.read"]
+      request: {headers: {"Authorization" => "Bearer token-1"}},
+      scopes: ["memory.read"],
     )
 
     expect(result).not_to be_allowed
@@ -384,12 +384,12 @@ RSpec.describe OAuth2::MCP::ResourceServer do # rubocop:disable Metrics/BlockLen
     server = described_class.new(
       resource_metadata: metadata,
       resource_metadata_url: metadata_url,
-      validator: validator(scopes: %w[memory.read], audience: ["https://brain.example.com/mcp"])
+      validator: validator(scopes: %w[memory.read], audience: ["https://brain.example.com/mcp"]),
     )
 
     result = server.authorize(
-      request: { headers: { "Authorization" => "Bearer token-1" } },
-      scopes: ["memory.write"]
+      request: {headers: {"Authorization" => "Bearer token-1"}},
+      scopes: ["memory.write"],
     )
 
     expect(result).not_to be_allowed
@@ -402,7 +402,7 @@ RSpec.describe OAuth2::MCP::ResourceServer do # rubocop:disable Metrics/BlockLen
       OAuth2::MCP::TokenClaims.new(
         subject: "user-1",
         scopes: scopes,
-        audience: audience
+        audience: audience,
       )
     end
   end
