@@ -181,6 +181,15 @@ workflows:
 #   org_and_project => related-org,ruby,org,project
 readme:
   top_logos: related-org,ruby,org
+  logo_row:
+    logos:
+      - type: related-org
+      - type: ruby
+      - type: org
+        slug: oauth
+        alt: ruby-oauth
+        href: https://github.com/ruby-oauth
+        credit: Chris Messina, CC BY-SA 3.0
   # Optional package-family README block.
   # Supported values: structuredmerge
   # Leave unset for standalone kettle-rb gems and most projects.

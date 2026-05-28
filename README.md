@@ -1,11 +1,11 @@
-[![Galtzo FLOSS Logo by Aboling0, CC BY-SA 4.0][🖼️galtzo-floss-i]][🖼️galtzo-floss] [![ruby-lang Logo, Yukihiro Matsumoto, Ruby Visual Identity Team, CC BY-SA 2.5][🖼️ruby-lang-i]][🖼️ruby-lang] [![ruby-oauth Logo by Aboling0, CC BY-SA 4.0][🖼️ruby-oauth-i]][🖼️ruby-oauth]
+[![Galtzo FLOSS Logo by Aboling0, CC BY-SA 4.0][🖼️galtzo-floss-i]][🖼️galtzo-floss] [![ruby-lang Logo, Yukihiro Matsumoto, Ruby Visual Identity Team, CC BY-SA 2.5][🖼️ruby-lang-i]][🖼️ruby-lang] [![ruby-oauth Logo by Chris Messina, CC BY-SA 3.0][🖼️oauth-i]][🖼️oauth]
 
 [🖼️galtzo-floss-i]: https://logos.galtzo.com/assets/images/galtzo-floss/avatar-192px.svg
 [🖼️galtzo-floss]: https://discord.gg/3qme4XHNKN
 [🖼️ruby-lang-i]: https://logos.galtzo.com/assets/images/ruby-lang/avatar-192px.svg
 [🖼️ruby-lang]: https://www.ruby-lang.org/
-[🖼️ruby-oauth-i]: https://logos.galtzo.com/assets/images/ruby-oauth/avatar-192px.svg
-[🖼️ruby-oauth]: https://github.com/ruby-oauth
+[🖼️oauth-i]: https://logos.galtzo.com/assets/images/oauth/avatar-192px.svg
+[🖼️oauth]: https://github.com/ruby-oauth
 
 # 🔮 OAuth2::MCP
 
@@ -28,6 +28,25 @@ I've summarized my thoughts in [this blog post](https://dev.to/galtzo/hostile-ta
 
 ## 🌻 Synopsis
 
+`oauth2-mcp` is a Ruby resource-server toolkit for securing HTTP Model Context
+Protocol servers with OAuth 2.1-style bearer authorization.
+
+It builds on the `oauth2` gem for the Ruby OAuth/OIDC substrate and adds the MCP
+resource-server pieces that generic OAuth clients do not provide.
+
+The gem is intentionally focused on the MCP server side:
+
+- protected-resource metadata for MCP endpoint discovery;
+- `WWW-Authenticate` bearer challenges;
+- scope and capability mapping for application policy layers;
+- provider adapters for WorkOS/AuthKit and generic OIDC/JWKS validation;
+- explicit audience/resource validation so tokens cannot be replayed against
+  another MCP server.
+
+Token passthrough is not a supported pattern. MCP servers should validate the
+incoming token for their own resource and issue separate downstream credentials
+when calling other services. Successful authorization results expose normalized
+claims and mapped capabilities, not the raw bearer token.
 
 ## 💡 Info you can shake a stick at
 
@@ -114,6 +133,54 @@ gem install oauth2-mcp
 
 ## ⚙️ Configuration
 
+`oauth2-mcp` does not use global configuration. Build the objects that match the
+OAuth provider and MCP endpoint you are protecting, then pass those objects to a
+resource server or Rack middleware.
+
+The core resource metadata is the MCP resource URI, the authorization server
+issuer(s), and the scopes your endpoint understands:
+
+```ruby
+metadata = OAuth2::MCP::ProtectedResourceMetadata.new(
+  resource: "https://brain.example.com/mcp",
+  authorization_servers: ["https://example.authkit.app"],
+  scopes_supported: %w[memory.read memory.write],
+)
+```
+
+Token validation is supplied by one of the validator adapters:
+
+- `OAuth2::MCP::JWTValidator` for JWT bearer tokens when you already have JWKS.
+- `OAuth2::MCP::OIDCDiscovery` when the authorization server exposes OIDC
+  discovery and JWKS metadata.
+- `OAuth2::MCP::WorkOSAuthKit` for WorkOS AuthKit resource-server JWTs.
+- `OAuth2::MCP::IntrospectionValidator` for opaque tokens validated through an
+  OAuth token introspection endpoint.
+
+Map provider scopes to application capabilities with `ScopeMapper` when the MCP
+server needs internal permission names:
+
+```ruby
+scope_mapper = OAuth2::MCP::ScopeMapper.new(
+  mapping: {
+    "memory.read" => "documents_read",
+    "memory.write" => "documents_write",
+  },
+)
+```
+
+Finally, configure the resource server with the metadata URL you publish to
+clients. That URL is emitted in `WWW-Authenticate` challenges so clients can
+discover how to obtain an acceptable token.
+
+```ruby
+resource_server = OAuth2::MCP::ResourceServer.new(
+  resource_metadata: metadata,
+  resource_metadata_url: "https://brain.example.com/.well-known/oauth-protected-resource/mcp",
+  validator: validator,
+  scope_mapper: scope_mapper,
+)
+```
 
 ## 🔧 Basic Usage
 
