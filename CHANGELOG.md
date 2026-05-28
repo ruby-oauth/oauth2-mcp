@@ -28,11 +28,21 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
+### Security
+
+## [0.1.0] - 2026-05-28
+
+- TAG: [v0.1.0][0.1.0t]
+- COVERAGE: 100.00% -- 285/285 lines in 2 files
+- BRANCH COVERAGE: 100.00% -- 82/82 branches in 2 files
+- 67.05% documented
+- Initial release
+
+### Fixed
+
 - Treated unsupported OAuth introspection response shapes as inactive tokens
   instead of allowing low-level indexing errors to escape.
 
-### Security
-
-## [0.1.0] - 2026-05-13
-
-- Initial release
+[Unreleased]: https://github.com/ruby-oauth/oauth2-mcp/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/ruby-oauth/oauth2-mcp/compare/03b55e60f4a464acdaa9ebd4e29556579055f102...v0.1.0
+[0.1.0t]: https://github.com/ruby-oauth/oauth2-mcp/releases/tag/v0.1.0

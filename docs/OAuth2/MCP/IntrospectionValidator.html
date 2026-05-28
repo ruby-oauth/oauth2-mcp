@@ -352,16 +352,16 @@
       <pre class="lines">
 
 
-217
-218
-219
-220
-221
 222
-223</pre>
+223
+224
+225
+226
+227
+228</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 217</span>
+      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 222</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>client:</span><span class='comma'>,</span> <span class='label'>introspection_url:</span><span class='comma'>,</span> <span class='label'>audience:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>issuer:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>token_type_hint:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>access_token</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
   <span class='ivar'>@client</span> <span class='op'>=</span> <span class='id identifier rubyid_client'>client</span>
@@ -407,12 +407,12 @@
       <pre class="lines">
 
 
-215
-216
-217</pre>
+220
+221
+222</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 215</span>
+      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 220</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_audience'>audience</span>
   <span class='ivar'>@audience</span>
@@ -449,12 +449,12 @@
       <pre class="lines">
 
 
-215
-216
-217</pre>
+220
+221
+222</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 215</span>
+      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 220</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_client'>client</span>
   <span class='ivar'>@client</span>
@@ -491,12 +491,12 @@
       <pre class="lines">
 
 
-215
-216
-217</pre>
+220
+221
+222</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 215</span>
+      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 220</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_introspection_url'>introspection_url</span>
   <span class='ivar'>@introspection_url</span>
@@ -533,12 +533,12 @@
       <pre class="lines">
 
 
-215
-216
-217</pre>
+220
+221
+222</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 215</span>
+      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 220</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_issuer'>issuer</span>
   <span class='ivar'>@issuer</span>
@@ -575,12 +575,12 @@
       <pre class="lines">
 
 
-215
-216
-217</pre>
+220
+221
+222</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 215</span>
+      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 220</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_token_type_hint'>token_type_hint</span>
   <span class='ivar'>@token_type_hint</span>
@@ -635,16 +635,16 @@
       <pre class="lines">
 
 
-225
-226
-227
-228
-229
 230
-231</pre>
+231
+232
+233
+234
+235
+236</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 225</span>
+      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 230</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_token'>token</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_claims'>claims</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="TokenClaims.html" title="OAuth2::MCP::TokenClaims (class)">TokenClaims</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_hash'><span class='object_link'><a href="TokenClaims.html#from_hash-class_method" title="OAuth2::MCP::TokenClaims.from_hash (method)">from_hash</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_introspect'>introspect</span><span class='lparen'>(</span><span class='id identifier rubyid_token'>token</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -663,7 +663,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu May 28 02:09:24 2026 by
+  Generated on Thu May 28 03:53:40 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.44 (ruby-4.0.5).
 </div>

@@ -763,7 +763,6 @@
       <pre class="lines">
 
 
-34
 35
 36
 37
@@ -772,12 +771,13 @@
 40
 41
 42
-43</pre>
+43
+44</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 34</span>
+      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 35</span>
 
-<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_from_hash'>from_hash</span><span class='lparen'>(</span><span class='id identifier rubyid_hash'>hash</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_from_hash'>from_hash</span><span class='lparen'>(</span><span class='id identifier rubyid_hash'>hash</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
     <span class='label'>subject:</span> <span class='id identifier rubyid_first_value'>first_value</span><span class='lparen'>(</span><span class='id identifier rubyid_hash'>hash</span><span class='comma'>,</span> <span class='symbol'>:subject</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>subject</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:sub</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sub</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='label'>scopes:</span> <span class='id identifier rubyid_first_value'>first_value</span><span class='lparen'>(</span><span class='id identifier rubyid_hash'>hash</span><span class='comma'>,</span> <span class='symbol'>:scopes</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>scopes</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:scope</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>scope</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='op'>||</span> <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='comma'>,</span>
@@ -836,12 +836,12 @@
       <pre class="lines">
 
 
-63
-64
-65</pre>
+66
+67
+68</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 63</span>
+      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 66</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_audience_includes?'>audience_includes?</span><span class='lparen'>(</span><span class='id identifier rubyid_resource'>resource</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_audience'>audience</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_resource'>resource</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rparen'>)</span>
@@ -889,14 +889,14 @@
       <pre class="lines">
 
 
-53
-54
-55
 56
-57</pre>
+57
+58
+59
+60</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 53</span>
+      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 56</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_expired?'>expired?</span><span class='lparen'>(</span><span class='label'>now:</span> <span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>unless</span> <span class='id identifier rubyid_expires_at'>expires_at</span>
@@ -946,12 +946,12 @@
       <pre class="lines">
 
 
-59
-60
-61</pre>
+62
+63
+64</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 59</span>
+      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 62</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_scopes_include?'>scopes_include?</span><span class='lparen'>(</span><span class='id identifier rubyid_required_scopes'>required_scopes</span><span class='rparen'>)</span>
   <span class='lparen'>(</span><span class='const'>Array</span><span class='lparen'>(</span><span class='id identifier rubyid_required_scopes'>required_scopes</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:to_s</span><span class='rparen'>)</span> <span class='op'>-</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
@@ -966,7 +966,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu May 28 02:09:24 2026 by
+  Generated on Thu May 28 03:53:40 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.44 (ruby-4.0.5).
 </div>

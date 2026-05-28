@@ -59,7 +59,7 @@
         <div class="clear"></div>
       </div>
 
-      <div id="content"><div id='filecontents'><p><a href="https://discord.gg/3qme4XHNKN"><img src="https://logos.galtzo.com/assets/images/galtzo-floss/avatar-192px.svg" alt="Galtzo FLOSS Logo by Aboling0, CC BY-SA 4.0"></a> <a href="https://www.ruby-lang.org/"><img src="https://logos.galtzo.com/assets/images/ruby-lang/avatar-192px.svg" alt="ruby-lang Logo, Yukihiro Matsumoto, Ruby Visual Identity Team, CC BY-SA 2.5"></a> <a href="https://github.com/ruby-oauth"><img src="https://logos.galtzo.com/assets/images/ruby-oauth/avatar-192px.svg" alt="ruby-oauth Logo by Aboling0, CC BY-SA 4.0"></a></p>
+      <div id="content"><div id='filecontents'><p><a href="https://discord.gg/3qme4XHNKN"><img src="https://logos.galtzo.com/assets/images/galtzo-floss/avatar-192px.svg" alt="Galtzo FLOSS Logo by Aboling0, CC BY-SA 4.0"></a> <a href="https://www.ruby-lang.org/"><img src="https://logos.galtzo.com/assets/images/ruby-lang/avatar-192px.svg" alt="ruby-lang Logo, Yukihiro Matsumoto, Ruby Visual Identity Team, CC BY-SA 2.5"></a> <a href="https://github.com/ruby-oauth"><img src="https://logos.galtzo.com/assets/images/oauth/avatar-192px.svg" alt="ruby-oauth Logo by Chris Messina, CC BY-SA 3.0"></a></p>
 
 <h1 id="-oauth2mcp">🔮 OAuth2::MCP</h1>
 
@@ -81,6 +81,29 @@ I've summarized my thoughts in [this blog post](https://dev.to/galtzo/hostile-ta
 </details>
 
 <h2 id="-synopsis">🌻 Synopsis</h2>
+
+<p><code>oauth2-mcp</code> is a Ruby resource-server toolkit for securing HTTP Model Context<br>
+Protocol servers with OAuth 2.1-style bearer authorization.</p>
+
+<p>It builds on the <code>oauth2</code> gem for the Ruby OAuth/OIDC substrate and adds the MCP<br>
+resource-server pieces that generic OAuth clients do not provide.</p>
+
+<p>The gem is intentionally focused on the MCP server side:</p>
+
+<ul>
+  <li>protected-resource metadata for MCP endpoint discovery;</li>
+  <li>
+<code>WWW-Authenticate</code> bearer challenges;</li>
+  <li>scope and capability mapping for application policy layers;</li>
+  <li>provider adapters for WorkOS/AuthKit and generic OIDC/JWKS validation;</li>
+  <li>explicit audience/resource validation so tokens cannot be replayed against<br>
+another MCP server.</li>
+</ul>
+
+<p>Token passthrough is not a supported pattern. MCP servers should validate the<br>
+incoming token for their own resource and issue separate downstream credentials<br>
+when calling other services. Successful authorization results expose normalized<br>
+claims and mapped capabilities, not the raw bearer token.</p>
 
 <h2 id="-info-you-can-shake-a-stick-at">💡 Info you can shake a stick at</h2>
 
@@ -127,7 +150,7 @@ I've summarized my thoughts in [this blog post](https://dev.to/galtzo/hostile-ta
     <tr>
       <td>Source</td>
       <td>
-<a href="https://gitlab.com/ruby-oauth/oauth2-mcp/-/tree/main/gems/oauth2-mcp"><img src="https://img.shields.io/badge/GitLab-FBA326?style=for-the-badge&amp;logo=Gitlab&amp;logoColor=orange" alt="Source on GitLab.com"></a> <a href="https://codeberg.org/ruby-oauth/oauth2-mcp/src/branch/main/gems/oauth2-mcp"><img src="https://img.shields.io/badge/CodeBerg-4893CC?style=for-the-badge&amp;logo=CodeBerg&amp;logoColor=blue" alt="Source on CodeBerg.org"></a> <a href="https://github.com/ruby-oauth/oauth2-mcp/tree/main/gems/oauth2-mcp"><img src="https://img.shields.io/badge/GitHub-238636?style=for-the-badge&amp;logo=Github&amp;logoColor=green" alt="Source on Github.com"></a> <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"><img src="https://img.shields.io/badge/KLOC-5.053-FFDD67.svg?style=for-the-badge&amp;logo=YouTube&amp;logoColor=blue" alt="The best SHA: dQw4w9WgXcQ!"></a>
+<a href="https://gitlab.com/ruby-oauth/oauth2-mcp/-/tree/main/gems/oauth2-mcp"><img src="https://img.shields.io/badge/GitLab-FBA326?style=for-the-badge&amp;logo=Gitlab&amp;logoColor=orange" alt="Source on GitLab.com"></a> <a href="https://codeberg.org/ruby-oauth/oauth2-mcp/src/branch/main/gems/oauth2-mcp"><img src="https://img.shields.io/badge/CodeBerg-4893CC?style=for-the-badge&amp;logo=CodeBerg&amp;logoColor=blue" alt="Source on CodeBerg.org"></a> <a href="https://github.com/ruby-oauth/oauth2-mcp/tree/main/gems/oauth2-mcp"><img src="https://img.shields.io/badge/GitHub-238636?style=for-the-badge&amp;logo=Github&amp;logoColor=green" alt="Source on Github.com"></a> <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"><img src="https://img.shields.io/badge/KLOC-0.285-FFDD67.svg?style=for-the-badge&amp;logo=YouTube&amp;logoColor=blue" alt="The best SHA: dQw4w9WgXcQ!"></a>
 </td>
     </tr>
     <tr>
@@ -292,6 +315,58 @@ not practical for the current toolchain.</p>
 </code></pre>
 
 <h2 id="️-configuration">⚙️ Configuration</h2>
+
+<p><code>oauth2-mcp</code> does not use global configuration. Build the objects that match the<br>
+OAuth provider and MCP endpoint you are protecting, then pass those objects to a<br>
+resource server or Rack middleware.</p>
+
+<p>The core resource metadata is the MCP resource URI, the authorization server<br>
+issuer(s), and the scopes your endpoint understands:</p>
+
+<pre class="code language-ruby"><code class="language-ruby">metadata = OAuth2::MCP::ProtectedResourceMetadata.new(
+  resource: &quot;https://brain.example.com/mcp&quot;,
+  authorization_servers: [&quot;https://example.authkit.app&quot;],
+  scopes_supported: %w[memory.read memory.write],
+)
+</code></pre>
+
+<p>Token validation is supplied by one of the validator adapters:</p>
+
+<ul>
+  <li>
+<code>OAuth2::MCP::JWTValidator</code> for JWT bearer tokens when you already have JWKS.</li>
+  <li>
+<code>OAuth2::MCP::OIDCDiscovery</code> when the authorization server exposes OIDC<br>
+discovery and JWKS metadata.</li>
+  <li>
+<code>OAuth2::MCP::WorkOSAuthKit</code> for WorkOS AuthKit resource-server JWTs.</li>
+  <li>
+<code>OAuth2::MCP::IntrospectionValidator</code> for opaque tokens validated through an<br>
+OAuth token introspection endpoint.</li>
+</ul>
+
+<p>Map provider scopes to application capabilities with <code>ScopeMapper</code> when the MCP<br>
+server needs internal permission names:</p>
+
+<pre class="code language-ruby"><code class="language-ruby">scope_mapper = OAuth2::MCP::ScopeMapper.new(
+  mapping: {
+    &quot;memory.read&quot; =&gt; &quot;documents_read&quot;,
+    &quot;memory.write&quot; =&gt; &quot;documents_write&quot;,
+  },
+)
+</code></pre>
+
+<p>Finally, configure the resource server with the metadata URL you publish to<br>
+clients. That URL is emitted in <code>WWW-Authenticate</code> challenges so clients can<br>
+discover how to obtain an acceptable token.</p>
+
+<pre class="code language-ruby"><code class="language-ruby">resource_server = OAuth2::MCP::ResourceServer.new(
+  resource_metadata: metadata,
+  resource_metadata_url: &quot;https://brain.example.com/.well-known/oauth-protected-resource/mcp&quot;,
+  validator: validator,
+  scope_mapper: scope_mapper,
+)
+</code></pre>
 
 <h2 id="-basic-usage">🔧 Basic Usage</h2>
 
@@ -569,7 +644,7 @@ Please consider sponsoring me or the project.</p>
 </div></div>
 
       <div id="footer">
-  Generated on Thu May 28 02:09:24 2026 by
+  Generated on Thu May 28 03:53:40 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.44 (ruby-4.0.5).
 </div>

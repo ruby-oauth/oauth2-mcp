@@ -414,16 +414,16 @@
       <pre class="lines">
 
 
-268
-269
-270
-271
-272
-273
-274</pre>
+279
+280
+281
+282
+283
+284
+285</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 268</span>
+      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 279</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>audience:</span><span class='comma'>,</span> <span class='label'>issuer:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>subdomain:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>client:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
   <span class='ivar'>@issuer</span> <span class='op'>=</span> <span class='id identifier rubyid_normalize_issuer'>normalize_issuer</span><span class='lparen'>(</span><span class='label'>issuer:</span> <span class='id identifier rubyid_issuer'>issuer</span><span class='comma'>,</span> <span class='label'>subdomain:</span> <span class='id identifier rubyid_subdomain'>subdomain</span><span class='rparen'>)</span>
@@ -469,12 +469,12 @@
       <pre class="lines">
 
 
-266
-267
-268</pre>
+277
+278
+279</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 266</span>
+      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 277</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_algorithms'>algorithms</span>
   <span class='ivar'>@algorithms</span>
@@ -511,12 +511,12 @@
       <pre class="lines">
 
 
-266
-267
-268</pre>
+277
+278
+279</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 266</span>
+      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 277</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_audience'>audience</span>
   <span class='ivar'>@audience</span>
@@ -553,12 +553,12 @@
       <pre class="lines">
 
 
-266
-267
-268</pre>
+277
+278
+279</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 266</span>
+      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 277</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_client'>client</span>
   <span class='ivar'>@client</span>
@@ -595,12 +595,12 @@
       <pre class="lines">
 
 
-266
-267
-268</pre>
+277
+278
+279</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 266</span>
+      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 277</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_issuer'>issuer</span>
   <span class='ivar'>@issuer</span>
@@ -637,12 +637,12 @@
       <pre class="lines">
 
 
-266
-267
-268</pre>
+277
+278
+279</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 266</span>
+      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 277</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_leeway'>leeway</span>
   <span class='ivar'>@leeway</span>
@@ -674,12 +674,12 @@
       <pre class="lines">
 
 
-276
-277
-278</pre>
+287
+288
+289</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 276</span>
+      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 287</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_token'>token</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_jwt_validator'>jwt_validator</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_token'>token</span><span class='rparen'>)</span>
@@ -704,12 +704,12 @@
       <pre class="lines">
 
 
-290
-291
-292</pre>
+301
+302
+303</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 290</span>
+      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 301</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_jwks'>jwks</span>
   <span class='ivar'>@jwks</span> <span class='op'>||=</span> <span class='id identifier rubyid_fetch_json'>fetch_json</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="#JWKS_PATH-constant" title="OAuth2::MCP::WorkOSAuthKit::JWKS_PATH (constant)">JWKS_PATH</a></span></span><span class='rparen'>)</span>
@@ -734,18 +734,18 @@
       <pre class="lines">
 
 
-280
-281
-282
-283
-284
-285
-286
-287
-288</pre>
+291
+292
+293
+294
+295
+296
+297
+298
+299</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 280</span>
+      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 291</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_jwt_validator'>jwt_validator</span>
   <span class='ivar'>@jwt_validator</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="JWTValidator.html" title="OAuth2::MCP::JWTValidator (class)">JWTValidator</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="JWTValidator.html#initialize-instance_method" title="OAuth2::MCP::JWTValidator#initialize (method)">new</a></span></span><span class='lparen'>(</span>
@@ -766,7 +766,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu May 28 02:09:24 2026 by
+  Generated on Thu May 28 03:53:40 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.44 (ruby-4.0.5).
 </div>

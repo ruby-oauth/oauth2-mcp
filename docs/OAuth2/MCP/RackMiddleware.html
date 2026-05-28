@@ -312,14 +312,14 @@
       <pre class="lines">
 
 
-316
-317
-318
-319
-320</pre>
+327
+328
+329
+330
+331</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 327</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_app'>app</span><span class='comma'>,</span> <span class='label'>resource_server:</span><span class='comma'>,</span> <span class='label'>scopes:</span> <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='rparen'>)</span>
   <span class='ivar'>@app</span> <span class='op'>=</span> <span class='id identifier rubyid_app'>app</span>
@@ -363,12 +363,12 @@
       <pre class="lines">
 
 
-314
-315
-316</pre>
+325
+326
+327</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 314</span>
+      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 325</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_app'>app</span>
   <span class='ivar'>@app</span>
@@ -405,12 +405,12 @@
       <pre class="lines">
 
 
-314
-315
-316</pre>
+325
+326
+327</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 314</span>
+      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 325</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resource_server'>resource_server</span>
   <span class='ivar'>@resource_server</span>
@@ -447,12 +447,12 @@
       <pre class="lines">
 
 
-314
-315
-316</pre>
+325
+326
+327</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 314</span>
+      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 325</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_scopes'>scopes</span>
   <span class='ivar'>@scopes</span>
@@ -484,16 +484,16 @@
       <pre class="lines">
 
 
-322
-323
-324
-325
-326
-327
-328</pre>
+333
+334
+335
+336
+337
+338
+339</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 322</span>
+      <pre class="code"><span class="info file"># File 'lib/oauth2/mcp.rb', line 333</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_env'>env</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_resource_server'>resource_server</span><span class='period'>.</span><span class='id identifier rubyid_authorize'>authorize</span><span class='lparen'>(</span><span class='label'>request:</span> <span class='id identifier rubyid_env'>env</span><span class='comma'>,</span> <span class='label'>scopes:</span> <span class='id identifier rubyid_scopes_for'>scopes_for</span><span class='lparen'>(</span><span class='id identifier rubyid_env'>env</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -512,7 +512,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu May 28 02:09:24 2026 by
+  Generated on Thu May 28 03:53:40 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.44 (ruby-4.0.5).
 </div>
