@@ -77,7 +77,7 @@
 # Set this to a single emoji that represents your gem. Examples: 🪙 🔑 🛠️ 🔮
 # This key is REQUIRED. kettle-jem will abort if it is absent.
 # ENV override: KJ_PROJECT_EMOJI
-project_emoji: 🔮
+project_emoji: 🍲
 
 # Engines this project supports.
 # List the Ruby engines that your gem targets. kettle-jem uses this to decide
@@ -319,6 +319,14 @@ templates:
   #
   # ENV override: KETTLE_JEM_TEMPLATE_PROFILE
   profile: "full"
+# StructuredMerge Git diff driver setup.
+# Default: semantic-diff installs local .gitattributes entries for semantic
+# structured diffs. Use builtin-diff to retain Git's built-in language drivers,
+# global to register driver commands in user config, include-file to write
+# .git/smorg/config, check to verify setup, undo to remove managed entries, or
+# none to opt out.
+# ENV override: KETTLE_JEM_GIT_DRIVERS
+git_drivers: semantic-diff
 
 # Optional kettle-jem plugins.
 # Each entry is a gem name. During bootstrap, kettle-jem ensures each plugin is

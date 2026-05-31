@@ -12,9 +12,9 @@ authors:
     orcid: 'https://orcid.org/0009-0008-8519-441X'
 identifiers:
   - type: url
-    value: 'https://github.com/ruby-oauth/oauth2-mcp/tree/main/gems/oauth2-mcp'
+    value: 'https://github.com/ruby-oauth/oauth2-mcp'
     description: "oauth2-mcp"
-repository-code: 'https://github.com/ruby-oauth/oauth2-mcp/tree/main/gems/oauth2-mcp'
+repository-code: 'https://github.com/ruby-oauth/oauth2-mcp'
 abstract: >-
   oauth2-mcp
 license: See license file

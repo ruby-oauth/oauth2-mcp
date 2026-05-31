@@ -13,8 +13,8 @@ Gem::Specification.new do |spec|
   spec.authors = ["Peter H. Boling"]
   spec.email = ["peter.boling@gmail.com"]
 
-  spec.summary = "🔮 OAuth 2.1 resource-server helpers for MCP servers."
-  spec.description = "🔮 oauth2-mcp provides Ruby helpers for securing HTTP Model Context Protocol servers " \
+  spec.summary = "🍲 OAuth 2.1 resource-server helpers for MCP servers."
+  spec.description = "🍲 oauth2-mcp provides Ruby helpers for securing HTTP Model Context Protocol servers " \
     "with OAuth protected-resource metadata, bearer challenges, and scoped authorization."
   spec.homepage = "https://github.com/ruby-oauth/oauth2-mcp"
   spec.licenses = ["MIT"]
