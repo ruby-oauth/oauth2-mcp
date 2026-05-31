@@ -467,7 +467,7 @@ Thanks for RTFM. ☺️
 [✉️ruby-friends]: https://app.daily.dev/squads/rubyfriends
 
 [✇bundle-group-pattern]: https://gist.github.com/pboling/4564780
-[⛳️gem-namespace]: https://github.com/ruby-oauth/oauth2-mcp/tree/main/gems/oauth2-mcp
+[⛳️gem-namespace]: https://github.com/ruby-oauth/oauth2-mcp
 [⛳️namespace-img]: https://img.shields.io/badge/namespace-OAuth2::MCP-3C2D2D.svg?style=square&logo=ruby&logoColor=white
 [⛳️gem-name]: https://bestgems.org/gems/oauth2-mcp
 [⛳️name-img]: https://img.shields.io/badge/name-oauth2--mcp-3C2D2D.svg?style=square&logo=rubygems&logoColor=red
@@ -507,11 +507,11 @@ Thanks for RTFM. ☺️
 [💁🏼‍♂️peterboling]: http://www.peterboling.com
 [🚂railsbling]: http://www.railsbling.com
 [📜src-gl-img]: https://img.shields.io/badge/GitLab-FBA326?style=for-the-badge&logo=Gitlab&logoColor=orange
-[📜src-gl]: https://gitlab.com/ruby-oauth/oauth2-mcp/-/tree/main/gems/oauth2-mcp
+[📜src-gl]: https://gitlab.com/ruby-oauth/oauth2-mcp
 [📜src-cb-img]: https://img.shields.io/badge/CodeBerg-4893CC?style=for-the-badge&logo=CodeBerg&logoColor=blue
-[📜src-cb]: https://codeberg.org/ruby-oauth/oauth2-mcp/src/branch/main/gems/oauth2-mcp
+[📜src-cb]: https://codeberg.org/ruby-oauth/oauth2-mcp
 [📜src-gh-img]: https://img.shields.io/badge/GitHub-238636?style=for-the-badge&logo=Github&logoColor=green
-[📜src-gh]: https://github.com/ruby-oauth/oauth2-mcp/tree/main/gems/oauth2-mcp
+[📜src-gh]: https://github.com/ruby-oauth/oauth2-mcp
 [📜docs-cr-rd-img]: https://img.shields.io/badge/RubyDoc-Current_Release-943CD2?style=for-the-badge&logo=readthedocs&logoColor=white
 [📜docs-head-rd-img]: https://img.shields.io/badge/YARD_on_Galtzo.com-HEAD-943CD2?style=for-the-badge&logo=readthedocs&logoColor=white
 [📜gl-wiki]: https://gitlab.com/ruby-oauth/oauth2-mcp/-/wikis/home

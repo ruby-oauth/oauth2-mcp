@@ -233,9 +233,9 @@ NOTE: To build without signing the gem set `SKIP_GEM_SIGNING` to any value in th
 14. Run `bundle exec rake release` which will create a git tag for the version,
     push git commits and tags, and push the `.gem` file to the gem host configured in the gemspec.
 
-[📜src-gl]: https://gitlab.com/ruby-oauth/oauth2-mcp/-/tree/main/gems/oauth2-mcp
-[📜src-cb]: https://codeberg.org/ruby-oauth/oauth2-mcp/src/branch/main/gems/oauth2-mcp
-[📜src-gh]: https://github.com/ruby-oauth/oauth2-mcp/tree/main/gems/oauth2-mcp
+[📜src-gl]: https://gitlab.com/ruby-oauth/oauth2-mcp
+[📜src-cb]: https://codeberg.org/ruby-oauth/oauth2-mcp
+[📜src-gh]: https://github.com/ruby-oauth/oauth2-mcp
 [🧪build]: https://github.com/ruby-oauth/oauth2-mcp/actions
 [🤝conduct]: https://github.com/ruby-oauth/oauth2-mcp/blob/main/CODE_OF_CONDUCT.md
 [🖐contrib-rocks]: https://contrib.rocks
