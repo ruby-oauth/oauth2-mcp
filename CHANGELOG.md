@@ -28,6 +28,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
+- Fixed generated documentation URLs that incorrectly pointed at a monorepo
+  `gems/oauth2-mcp` path.
+
 ### Security
 
 ## [0.1.0] - 2026-05-28
