@@ -39,7 +39,7 @@ module OAuth2
             audience: first_value(hash, :audience, "audience", :aud, "aud") || [],
             issuer: first_value(hash, :issuer, "issuer", :iss, "iss"),
             expires_at: first_value(hash, :expires_at, "expires_at", :exp, "exp"),
-            raw: hash,
+            raw: hash
           )
         end
 
@@ -162,7 +162,7 @@ module OAuth2
           iss: issuer,
           verify_aud: !audience.nil?,
           aud: audience,
-          leeway: leeway,
+          leeway: leeway
         }
       end
 
@@ -197,7 +197,7 @@ module OAuth2
           issuer: issuer,
           audience: audience,
           algorithms: algorithms || default_algorithms,
-          leeway: leeway,
+          leeway: leeway
         )
       end
 
@@ -255,7 +255,7 @@ module OAuth2
           body: URI.encode_www_form(token: token, token_type_hint: token_type_hint),
           headers: {"Content-Type" => "application/x-www-form-urlencoded"},
           parse: :json,
-          snaky: false,
+          snaky: false
         }
       end
 
@@ -294,7 +294,7 @@ module OAuth2
           issuer: issuer,
           audience: audience,
           algorithms: algorithms,
-          leeway: leeway,
+          leeway: leeway
         )
       end
 
@@ -365,7 +365,7 @@ module OAuth2
             error: error,
             error_description: error_description,
             required_scopes: required_scopes,
-            challenge: challenge,
+            challenge: challenge
           )
         end
       end
@@ -455,7 +455,7 @@ module OAuth2
           status: 401,
           error: nil,
           error_description: nil,
-          required_scopes: required_scopes,
+          required_scopes: required_scopes
         )
       end
 
@@ -464,7 +464,7 @@ module OAuth2
           status: 401,
           error: "invalid_token",
           error_description: description,
-          required_scopes: required_scopes,
+          required_scopes: required_scopes
         )
       end
 
@@ -473,7 +473,7 @@ module OAuth2
           status: 403,
           error: "insufficient_scope",
           error_description: "Additional scope is required.",
-          required_scopes: required_scopes,
+          required_scopes: required_scopes
         )
       end
 
@@ -483,7 +483,7 @@ module OAuth2
           error: error,
           error_description: error_description,
           required_scopes: required_scopes,
-          challenge: challenge(error: error, error_description: error_description, required_scopes: required_scopes),
+          challenge: challenge(error: error, error_description: error_description, required_scopes: required_scopes)
         )
       end
 
@@ -492,7 +492,7 @@ module OAuth2
           resource_metadata: resource_metadata_url,
           scope: required_scopes,
           error: error,
-          error_description: error_description,
+          error_description: error_description
         )
       end
     end
@@ -516,7 +516,7 @@ module OAuth2
         {
           resource: resource,
           authorization_servers: authorization_servers,
-          scopes_supported: scopes_supported,
+          scopes_supported: scopes_supported
         }.merge(metadata).compact
       end
 
@@ -550,7 +550,7 @@ module OAuth2
           resource_metadata: resource_metadata,
           scope: format_scope(scope),
           error: error,
-          error_description: error_description,
+          error_description: error_description
         }.compact
 
         "Bearer #{parameters.map { |key, value| %(#{key}="#{escape(value)}") }.join(", ")}"

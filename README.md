@@ -135,7 +135,7 @@ issuer(s), and the scopes your endpoint understands:
 metadata = OAuth2::MCP::ProtectedResourceMetadata.new(
   resource: "https://brain.example.com/mcp",
   authorization_servers: ["https://example.authkit.app"],
-  scopes_supported: %w[memory.read memory.write],
+  scopes_supported: %w[memory.read memory.write]
 )
 ```
 
@@ -155,8 +155,8 @@ server needs internal permission names:
 scope_mapper = OAuth2::MCP::ScopeMapper.new(
   mapping: {
     "memory.read" => "documents_read",
-    "memory.write" => "documents_write",
-  },
+    "memory.write" => "documents_write"
+  }
 )
 ```
 
@@ -169,7 +169,7 @@ resource_server = OAuth2::MCP::ResourceServer.new(
   resource_metadata: metadata,
   resource_metadata_url: "https://brain.example.com/.well-known/oauth-protected-resource/mcp",
   validator: validator,
-  scope_mapper: scope_mapper,
+  scope_mapper: scope_mapper
 )
 ```
 
@@ -181,7 +181,7 @@ Build protected-resource metadata for an MCP endpoint:
 metadata = OAuth2::MCP::ProtectedResourceMetadata.new(
   resource: "https://brain.example.com/mcp",
   authorization_servers: ["https://example.authkit.app"],
-  scopes_supported: %w[memory.read memory.write],
+  scopes_supported: %w[memory.read memory.write]
 )
 
 metadata.to_json
@@ -194,7 +194,7 @@ challenge = OAuth2::MCP::BearerChallenge.new(
   resource_metadata: "https://brain.example.com/.well-known/oauth-protected-resource/mcp",
   scope: %w[memory.read],
   error: "insufficient_scope",
-  error_description: "memory.read is required",
+  error_description: "memory.read is required"
 )
 
 headers["WWW-Authenticate"] = challenge.to_header
@@ -206,32 +206,32 @@ Authorize an MCP HTTP request with a provider-specific token validator:
 metadata = OAuth2::MCP::ProtectedResourceMetadata.new(
   resource: "https://brain.example.com/mcp",
   authorization_servers: ["https://example.authkit.app"],
-  scopes_supported: %w[memory.read memory.write],
+  scopes_supported: %w[memory.read memory.write]
 )
 
 validator = OAuth2::MCP::JWTValidator.new(
   jwks: {"keys" => provider_jwks},
   issuer: "https://example.authkit.app",
-  audience: "https://brain.example.com/mcp",
+  audience: "https://brain.example.com/mcp"
 )
 
 scope_mapper = OAuth2::MCP::ScopeMapper.new(
   mapping: {
     "memory.read" => "documents_read",
-    "memory.write" => "documents_write",
-  },
+    "memory.write" => "documents_write"
+  }
 )
 
 resource_server = OAuth2::MCP::ResourceServer.new(
   resource_metadata: metadata,
   resource_metadata_url: "https://brain.example.com/.well-known/oauth-protected-resource/mcp",
   validator: validator,
-  scope_mapper: scope_mapper,
+  scope_mapper: scope_mapper
 )
 
 result = resource_server.authorize(
   request: rack_env,
-  scopes: ["memory.read"],
+  scopes: ["memory.read"]
 )
 
 halt result.status, result.headers, "" unless result.allowed?
@@ -249,9 +249,9 @@ Or build the validator from OIDC discovery:
 
 ```ruby
 validator = OAuth2::MCP::OIDCDiscovery.new(
-  issuer: "https://example.authkit.app",
+  issuer: "https://example.authkit.app"
 ).jwt_validator(
-  audience: "https://brain.example.com/mcp",
+  audience: "https://brain.example.com/mcp"
 )
 ```
 
@@ -261,7 +261,7 @@ issuer and `/oauth2/jwks` endpoint:
 ```ruby
 validator = OAuth2::MCP::WorkOSAuthKit.new(
   subdomain: "acme",
-  audience: "https://brain.example.com/mcp",
+  audience: "https://brain.example.com/mcp"
 )
 ```
 
@@ -273,7 +273,7 @@ validator = OAuth2::MCP::IntrospectionValidator.new(
   client: oauth_client,
   introspection_url: "https://auth.example.com/oauth2/introspection",
   audience: "https://brain.example.com/mcp",
-  issuer: "https://auth.example.com",
+  issuer: "https://auth.example.com"
 )
 ```
 
