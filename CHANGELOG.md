@@ -24,6 +24,7 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Refreshed generated package metadata, support documentation, CI workflows,
   and development dependency floors from the current kettle-jem template.
+- Updated the locked `auth-sanitizer` runtime dependency to v0.1.5.
 
 ### Deprecated
 
