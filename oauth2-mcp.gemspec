@@ -93,7 +93,6 @@ Gem::Specification.new do |spec|
   spec.bindir = "exe"
   # Listed files are the relative paths from bindir above.
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
-
   spec.require_paths = ["lib"]
 
   # Utilities
