@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 # kettle-jem:freeze
-# To retain chunks of comments & code during oauth2-mcp templating:
+# To retain chunks of comments & code during kettle-jem templating:
 # Wrap custom sections with freeze markers (e.g., as above and below this comment chunk).
-# oauth2-mcp will then preserve content between those markers across template runs.
+# kettle-jem will then preserve content between those markers across template runs.
 # kettle-jem:unfreeze
 
 Gem::Specification.new do |spec|
@@ -93,6 +93,7 @@ Gem::Specification.new do |spec|
   spec.bindir = "exe"
   # Listed files are the relative paths from bindir above.
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
+
   spec.require_paths = ["lib"]
 
   # Utilities
@@ -126,7 +127,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency("require_bench", "~> 1.0", ">= 1.0.4")            # ruby >= 2.2.0
 
   # Testing
-  spec.add_development_dependency("appraisal2", "~> 3.0", ">= 3.0.6")               # ruby >= 1.8.7, for testing against multiple versions of dependencies
+  spec.add_development_dependency("appraisal2", "~> 3.0", ">= 3.0.7")               # ruby >= 1.8.7, for testing against multiple versions of dependencies
   spec.add_development_dependency("kettle-test", "~> 2.0", ">= 2.0.3")             # ruby >= 3.2.0
   spec.add_development_dependency("turbo_tests2", "~> 3.1", ">= 3.1.1")            # ruby >= 2.4.0, default kettle-test runner
 
