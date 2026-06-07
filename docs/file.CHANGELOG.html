@@ -76,11 +76,27 @@ Please file a bug if you notice a violation of semantic versioning.</p>
 
 <h3 id="changed">Changed</h3>
 
+<ul>
+  <li>Raised generated <code>version_gem</code> and <code>appraisal2</code> dependency floors to<br>
+<code>version_gem</code> &gt;= 1.1.10 and <code>appraisal2</code> &gt;= 3.0.9.</li>
+  <li>Refreshed generated package metadata, support documentation, CI workflows,<br>
+and development dependency floors from the current kettle-jem template.</li>
+  <li>Updated generated OpenCollective funding metadata to use the<br>
+<code>ruby-oauth</code> collective.</li>
+  <li>Raised the runtime dependency floor for <code>oauth2</code> to <code>&gt;= 2.0.21</code>.</li>
+  <li>Updated the locked <code>auth-sanitizer</code> runtime dependency to v0.2.1.</li>
+</ul>
+
 <h3 id="deprecated">Deprecated</h3>
 
 <h3 id="removed">Removed</h3>
 
 <h3 id="fixed">Fixed</h3>
+
+<ul>
+  <li>Fixed generated documentation URLs that incorrectly pointed at a monorepo<br>
+<code>gems/oauth2-mcp</code> path.</li>
+</ul>
 
 <h3 id="security">Security</h3>
 
@@ -106,7 +122,7 @@ instead of allowing low-level indexing errors to escape.</li>
 </div></div>
 
       <div id="footer">
-  Generated on Thu May 28 03:53:40 2026 by
+  Generated on Sat Jun  6 21:54:33 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.44 (ruby-4.0.5).
 </div>

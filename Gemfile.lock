@@ -3,7 +3,7 @@ PATH
   specs:
     oauth2-mcp (0.1.0)
       jwt (>= 2.7, < 4.0)
-      oauth2 (~> 2.0.20, >= 2.0)
+      oauth2 (~> 2.0, >= 2.0.21)
       version_gem (~> 1.1, >= 1.1.10)
 
 GEM
@@ -139,15 +139,15 @@ GEM
       racc (~> 1.4)
     nomono (1.0.2)
       version_gem (~> 1.1, >= 1.1.9)
-    oauth2 (2.0.20)
-      auth-sanitizer (~> 0.1, >= 0.1.3)
+    oauth2 (2.0.21)
+      auth-sanitizer (~> 0.2, >= 0.2.1)
       faraday (>= 0.17.3, < 4.0)
       jwt (>= 1.0, < 4.0)
       logger (~> 1.2)
       multi_xml (~> 0.5)
       rack (>= 1.2, < 4)
       snaky_hash (~> 2.0, >= 2.0.4)
-      version_gem (~> 1.1, >= 1.1.9)
+      version_gem (~> 1.1, >= 1.1.10)
     openssl (4.0.2)
     ostruct (0.6.3)
     parallel (1.28.0)
@@ -483,7 +483,7 @@ CHECKSUMS
   net-http (0.9.1) sha256=25ba0b67c63e89df626ed8fac771d0ad24ad151a858af2cc8e6a716ca4336996
   nokogiri (1.19.3-x86_64-linux-gnu) sha256=2f5078620fe12e83669b5b17311b32532a8153d02eee7ad06948b926d6080976
   nomono (1.0.2) sha256=49236d39350a66f28ed3f51ec2d94afb8278667576e37ed9763a591e15b65f80
-  oauth2 (2.0.20) sha256=790c6316346da12f9dcaf27a67530f802950af05d35c3874918da84f2deae674
+  oauth2 (2.0.21) sha256=d027f6f96051428b9697b5b8e59338fff1afb872fedc868278dc057b3b942718
   oauth2-mcp (0.1.0)
   openssl (4.0.2) sha256=1037ad2868ae58df9ad917891c0c0f9815a1172f6846d4bcdd508e4c2ee747c2
   ostruct (0.6.3) sha256=95a2ed4a4bd1d190784e666b47b2d3f078e4a9efda2fccf18f84ddc6538ed912

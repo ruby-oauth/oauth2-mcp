@@ -59,7 +59,7 @@
         <div class="clear"></div>
       </div>
 
-      <div id="content"><div id='filecontents'><p><a href="https://discord.gg/3qme4XHNKN"><img src="https://logos.galtzo.com/assets/images/galtzo-floss/avatar-192px.svg" alt="Galtzo FLOSS Logo by Aboling0, CC BY-SA 4.0"></a> <a href="https://www.ruby-lang.org/"><img src="https://logos.galtzo.com/assets/images/ruby-lang/avatar-192px.svg" alt="ruby-lang Logo, Yukihiro Matsumoto, Ruby Visual Identity Team, CC BY-SA 2.5"></a> <a href="https://github.com/ruby-oauth"><img src="https://logos.galtzo.com/assets/images/oauth/avatar-192px.svg" alt="ruby-oauth Logo by Chris Messina, CC BY-SA 3.0"></a></p>
+      <div id="content"><div id='filecontents'><p><a href="https://discord.gg/3qme4XHNKN"><img alt="Galtzo FLOSS Logo by Aboling0, CC BY-SA 4.0" src="https://logos.galtzo.com/assets/images/galtzo-floss/avatar-128px.svg" align="right"></a> <a href="https://ruby-toolbox.com"><img alt="ruby-lang Logo, Yukihiro Matsumoto, Ruby Visual Identity Team, CC BY-SA 2.5" src="https://logos.galtzo.com/assets/images/ruby-lang/avatar-128px.svg" align="right"></a> <a href="https://github.com/ruby-oauth"><img alt="ruby-oauth Logo by Chris Messina, CC BY-SA 3.0" src="https://logos.galtzo.com/assets/images/oauth/avatar-128px.svg" align="right"></a></p>
 
 <h1 id="-oauth2mcp">🍲 OAuth2::MCP</h1>
 
@@ -71,7 +71,7 @@
 
 <p><code>if ci_badges.map(&amp;:color).all? { it == "green"}</code> 👇️ send money so I can do more of this. FLOSS maintenance is now my full-time job.</p>
 
-<p><a href="https://github.com/sponsors/pboling"><img src="https://img.shields.io/badge/Sponsor_Me!-pboling.svg?style=social&amp;logo=github" alt="Sponsor Me on Github"></a> <a href="https://liberapay.com/pboling/donate"><img src="https://img.shields.io/liberapay/goal/pboling.svg?logo=liberapay&amp;color=a51611&amp;style=flat" alt="Liberapay Goal Progress"></a> <a href="https://www.paypal.com/paypalme/peterboling"><img src="https://img.shields.io/badge/donate-paypal-a51611.svg?style=flat&amp;logo=paypal" alt="Donate on PayPal"></a> <a href="https://www.buymeacoffee.com/pboling"><img src="https://img.shields.io/badge/buy_me_a_coffee-%E2%9C%93-a51611.svg?style=flat" alt="Buy me a coffee"></a> <a href="https://polar.sh/pboling"><img src="https://img.shields.io/badge/polar-donate-a51611.svg?style=flat" alt="Donate on Polar"></a> <a href="https://ko-fi.com/pboling"><img src="https://img.shields.io/badge/ko--fi-%E2%9C%93-a51611.svg?style=flat" alt="Donate at ko-fi.com"></a></p>
+<p><a href="https://opencollective.com/ruby-oauth#backer"><img src="https://opencollective.com/ruby-oauth/backers/badge.svg?style=flat" alt="OpenCollective Backers"></a> <a href="https://opencollective.com/ruby-oauth#sponsor"><img src="https://opencollective.com/ruby-oauth/sponsors/badge.svg?style=flat" alt="OpenCollective Sponsors"></a> <a href="https://github.com/sponsors/pboling"><img src="https://img.shields.io/badge/Sponsor_Me!-pboling.svg?style=social&amp;logo=github" alt="Sponsor Me on Github"></a> <a href="https://liberapay.com/pboling/donate"><img src="https://img.shields.io/liberapay/goal/pboling.svg?logo=liberapay&amp;color=a51611&amp;style=flat" alt="Liberapay Goal Progress"></a> <a href="https://www.paypal.com/paypalme/peterboling"><img src="https://img.shields.io/badge/donate-paypal-a51611.svg?style=flat&amp;logo=paypal" alt="Donate on PayPal"></a> <a href="https://www.buymeacoffee.com/pboling"><img src="https://img.shields.io/badge/buy_me_a_coffee-%E2%9C%93-a51611.svg?style=flat" alt="Buy me a coffee"></a> <a href="https://polar.sh/pboling"><img src="https://img.shields.io/badge/polar-donate-a51611.svg?style=flat" alt="Donate on Polar"></a> <a href="https://ko-fi.com/pboling"><img src="https://img.shields.io/badge/ko--fi-%E2%9C%93-a51611.svg?style=flat" alt="Donate at ko-fi.com"></a></p>
 
 <details>
  <summary>👣 How will this project approach the September 2025 hostile takeover of RubyGems? 🚑️</summary>
@@ -80,7 +80,8 @@ I've summarized my thoughts in [this blog post](https://dev.to/galtzo/hostile-ta
 
 </details>
 
-<h2 id="-synopsis">🌻 Synopsis</h2>
+<h2 id="-synopsis--">🌻 Synopsis <a href="https://discord.gg/3qme4XHNKN"><img alt="Galtzo FLOSS Logo by Aboling0, CC BY-SA 4.0" src="https://logos.galtzo.com/assets/images/galtzo-floss/avatar-128px.svg" width="8%" align="right"></a> <a href="https://ruby-toolbox.com"><img alt="ruby-lang Logo, Yukihiro Matsumoto, Ruby Visual Identity Team, CC BY-SA 2.5" src="https://logos.galtzo.com/assets/images/ruby-lang/avatar-128px.svg" width="8%" align="right"></a>
+</h2>
 
 <p><code>oauth2-mcp</code> is a Ruby resource-server toolkit for securing HTTP Model Context<br>
 Protocol servers with OAuth 2.1-style bearer authorization.</p>
@@ -326,7 +327,7 @@ issuer(s), and the scopes your endpoint understands:</p>
 <pre class="code language-ruby"><code class="language-ruby">metadata = OAuth2::MCP::ProtectedResourceMetadata.new(
   resource: &quot;https://brain.example.com/mcp&quot;,
   authorization_servers: [&quot;https://example.authkit.app&quot;],
-  scopes_supported: %w[memory.read memory.write],
+  scopes_supported: %w[memory.read memory.write]
 )
 </code></pre>
 
@@ -351,8 +352,8 @@ server needs internal permission names:</p>
 <pre class="code language-ruby"><code class="language-ruby">scope_mapper = OAuth2::MCP::ScopeMapper.new(
   mapping: {
     &quot;memory.read&quot; =&gt; &quot;documents_read&quot;,
-    &quot;memory.write&quot; =&gt; &quot;documents_write&quot;,
-  },
+    &quot;memory.write&quot; =&gt; &quot;documents_write&quot;
+  }
 )
 </code></pre>
 
@@ -364,7 +365,7 @@ discover how to obtain an acceptable token.</p>
   resource_metadata: metadata,
   resource_metadata_url: &quot;https://brain.example.com/.well-known/oauth-protected-resource/mcp&quot;,
   validator: validator,
-  scope_mapper: scope_mapper,
+  scope_mapper: scope_mapper
 )
 </code></pre>
 
@@ -375,7 +376,7 @@ discover how to obtain an acceptable token.</p>
 <pre class="code language-ruby"><code class="language-ruby">metadata = OAuth2::MCP::ProtectedResourceMetadata.new(
   resource: &quot;https://brain.example.com/mcp&quot;,
   authorization_servers: [&quot;https://example.authkit.app&quot;],
-  scopes_supported: %w[memory.read memory.write],
+  scopes_supported: %w[memory.read memory.write]
 )
 
 metadata.to_json
@@ -387,7 +388,7 @@ metadata.to_json
   resource_metadata: &quot;https://brain.example.com/.well-known/oauth-protected-resource/mcp&quot;,
   scope: %w[memory.read],
   error: &quot;insufficient_scope&quot;,
-  error_description: &quot;memory.read is required&quot;,
+  error_description: &quot;memory.read is required&quot;
 )
 
 headers[&quot;WWW-Authenticate&quot;] = challenge.to_header
@@ -398,32 +399,32 @@ headers[&quot;WWW-Authenticate&quot;] = challenge.to_header
 <pre class="code language-ruby"><code class="language-ruby">metadata = OAuth2::MCP::ProtectedResourceMetadata.new(
   resource: &quot;https://brain.example.com/mcp&quot;,
   authorization_servers: [&quot;https://example.authkit.app&quot;],
-  scopes_supported: %w[memory.read memory.write],
+  scopes_supported: %w[memory.read memory.write]
 )
 
 validator = OAuth2::MCP::JWTValidator.new(
   jwks: {&quot;keys&quot; =&gt; provider_jwks},
   issuer: &quot;https://example.authkit.app&quot;,
-  audience: &quot;https://brain.example.com/mcp&quot;,
+  audience: &quot;https://brain.example.com/mcp&quot;
 )
 
 scope_mapper = OAuth2::MCP::ScopeMapper.new(
   mapping: {
     &quot;memory.read&quot; =&gt; &quot;documents_read&quot;,
-    &quot;memory.write&quot; =&gt; &quot;documents_write&quot;,
-  },
+    &quot;memory.write&quot; =&gt; &quot;documents_write&quot;
+  }
 )
 
 resource_server = OAuth2::MCP::ResourceServer.new(
   resource_metadata: metadata,
   resource_metadata_url: &quot;https://brain.example.com/.well-known/oauth-protected-resource/mcp&quot;,
   validator: validator,
-  scope_mapper: scope_mapper,
+  scope_mapper: scope_mapper
 )
 
 result = resource_server.authorize(
   request: rack_env,
-  scopes: [&quot;memory.read&quot;],
+  scopes: [&quot;memory.read&quot;]
 )
 
 halt result.status, result.headers, &quot;&quot; unless result.allowed?
@@ -439,9 +440,9 @@ halt result.status, result.headers, &quot;&quot; unless result.allowed?
 <p>Or build the validator from OIDC discovery:</p>
 
 <pre class="code language-ruby"><code class="language-ruby">validator = OAuth2::MCP::OIDCDiscovery.new(
-  issuer: &quot;https://example.authkit.app&quot;,
+  issuer: &quot;https://example.authkit.app&quot;
 ).jwt_validator(
-  audience: &quot;https://brain.example.com/mcp&quot;,
+  audience: &quot;https://brain.example.com/mcp&quot;
 )
 </code></pre>
 
@@ -450,7 +451,7 @@ issuer and <code>/oauth2/jwks</code> endpoint:</p>
 
 <pre class="code language-ruby"><code class="language-ruby">validator = OAuth2::MCP::WorkOSAuthKit.new(
   subdomain: &quot;acme&quot;,
-  audience: &quot;https://brain.example.com/mcp&quot;,
+  audience: &quot;https://brain.example.com/mcp&quot;
 )
 </code></pre>
 
@@ -461,7 +462,7 @@ configured for the authorization server:</p>
   client: oauth_client,
   introspection_url: &quot;https://auth.example.com/oauth2/introspection&quot;,
   audience: &quot;https://brain.example.com/mcp&quot;,
-  issuer: &quot;https://auth.example.com&quot;,
+  issuer: &quot;https://auth.example.com&quot;
 )
 </code></pre>
 
@@ -472,7 +473,7 @@ Raising a monthly budget of… “dollars” would make the project more sustain
 
 <p>We welcome both individual and corporate sponsors! We also offer a<br>
 wide array of funding channels to account for your preferences.<br>
-Currently, <a href="https://github.com/sponsors/pboling">GitHub Sponsors</a>, and <a href="https://liberapay.com/pboling/donate">Liberapay</a> are our preferred funding platforms.</p>
+Currently, <a href="https://opencollective.com/ruby-oauth">Open Collective</a> is our preferred funding platform.</p>
 
 <p><strong>If you’re working in a company that’s making significant use of ruby-oauth tools we’d<br>
 appreciate it if you suggest to your company to become a ruby-oauth sponsor.</strong></p>
@@ -481,6 +482,7 @@ appreciate it if you suggest to your company to become a ruby-oauth sponsor.</st
 <a href="https://github.com/sponsors/pboling">GitHub Sponsors</a>,<br>
 <a href="https://liberapay.com/pboling/donate">Liberapay</a>,<br>
 <a href="https://www.paypal.com/paypalme/peterboling">PayPal</a>,<br>
+<a href="https://opencollective.com/ruby-oauth">Open Collective</a><br>
 and <a href="https://tidelift.com/subscription/pkg/rubygems-oauth2-mcp?utm_source=rubygems-oauth2-mcp&amp;utm_medium=referral&amp;utm_campaign=readme">Tidelift</a>.</p>
 
 <table>
@@ -496,6 +498,26 @@ and <a href="https://tidelift.com/subscription/pkg/rubygems-oauth2-mcp?utm_sourc
   </tbody>
 </table>
 
+<h3 id="open-collective-for-individuals">Open Collective for Individuals</h3>
+
+<p>Support us with a monthly donation and help us continue our activities. [<a href="https://opencollective.com/ruby-oauth#backer">Become a backer</a>]</p>
+
+<p>NOTE: <a href="https://github.com/ruby-oauth/oauth2-mcp/blob/main/exe/kettle-readme-backers">kettle-readme-backers</a> updates this list every day, automatically.</p>
+
+<!-- OPENCOLLECTIVE-INDIVIDUALS:START -->
+<p>No backers yet. Be the first!<br>
+<!-- OPENCOLLECTIVE-INDIVIDUALS:END --></p>
+
+<h3 id="open-collective-for-organizations">Open Collective for Organizations</h3>
+
+<p>Become a sponsor and get your logo on our README on GitHub with a link to your site. [<a href="https://opencollective.com/ruby-oauth#sponsor">Become a sponsor</a>]</p>
+
+<p>NOTE: <a href="https://github.com/ruby-oauth/oauth2-mcp/blob/main/exe/kettle-readme-backers">kettle-readme-backers</a> updates this list every day, automatically.</p>
+
+<!-- OPENCOLLECTIVE-ORGANIZATIONS:START -->
+<p>No sponsors yet. Be the first!<br>
+<!-- OPENCOLLECTIVE-ORGANIZATIONS:END --></p>
+
 <h3 id="another-way-to-support-open-source">Another way to support open-source</h3>
 
 <p>I’m driven by a passion to foster a thriving open-source community – a space where people can tackle complex problems, no matter how small. Revitalizing libraries that have fallen into disrepair, and building new libraries focused on solving real-world challenges, are my passions. I was recently affected by layoffs, and the tech jobs market is unwelcoming. I’m reaching out here because your support would significantly aid my efforts to provide for my family, and my farm (11 🐔 chickens, 2 🐶 dogs, 3 🐰 rabbits, 8 🐈‍ cats).</p>
@@ -506,7 +528,7 @@ and <a href="https://tidelift.com/subscription/pkg/rubygems-oauth2-mcp?utm_sourc
 
 <p><strong><a href="https://floss-funding.dev">Floss-Funding.dev</a>: 👉️ No network calls. 👉️ No tracking. 👉️ No oversight. 👉️ Minimal crypto hashing. 💡 Easily disabled nags</strong></p>
 
-<p><a href="https://github.com/sponsors/pboling"><img src="https://img.shields.io/badge/Sponsor_Me!-pboling.svg?style=social&amp;logo=github" alt="Sponsor Me on Github"></a> <a href="https://liberapay.com/pboling/donate"><img src="https://img.shields.io/liberapay/goal/pboling.svg?logo=liberapay&amp;color=a51611&amp;style=flat" alt="Liberapay Goal Progress"></a> <a href="https://www.paypal.com/paypalme/peterboling"><img src="https://img.shields.io/badge/donate-paypal-a51611.svg?style=flat&amp;logo=paypal" alt="Donate on PayPal"></a> <a href="https://www.buymeacoffee.com/pboling"><img src="https://img.shields.io/badge/buy_me_a_coffee-%E2%9C%93-a51611.svg?style=flat" alt="Buy me a coffee"></a> <a href="https://polar.sh/pboling"><img src="https://img.shields.io/badge/polar-donate-a51611.svg?style=flat" alt="Donate on Polar"></a> <a href="https://ko-fi.com/pboling"><img src="https://img.shields.io/badge/ko--fi-%E2%9C%93-a51611.svg?style=flat" alt="Donate to my FLOSS efforts at ko-fi.com"></a> <a href="https://patreon.com/galtzo"><img src="https://img.shields.io/badge/patreon-donate-a51611.svg?style=flat" alt="Donate to my FLOSS efforts using Patreon"></a></p>
+<p><a href="https://opencollective.com/ruby-oauth#backer"><img src="https://opencollective.com/ruby-oauth/backers/badge.svg?style=flat" alt="OpenCollective Backers"></a> <a href="https://opencollective.com/ruby-oauth#sponsor"><img src="https://opencollective.com/ruby-oauth/sponsors/badge.svg?style=flat" alt="OpenCollective Sponsors"></a> <a href="https://github.com/sponsors/pboling"><img src="https://img.shields.io/badge/Sponsor_Me!-pboling.svg?style=social&amp;logo=github" alt="Sponsor Me on Github"></a> <a href="https://liberapay.com/pboling/donate"><img src="https://img.shields.io/liberapay/goal/pboling.svg?logo=liberapay&amp;color=a51611&amp;style=flat" alt="Liberapay Goal Progress"></a> <a href="https://www.paypal.com/paypalme/peterboling"><img src="https://img.shields.io/badge/donate-paypal-a51611.svg?style=flat&amp;logo=paypal" alt="Donate on PayPal"></a> <a href="https://www.buymeacoffee.com/pboling"><img src="https://img.shields.io/badge/buy_me_a_coffee-%E2%9C%93-a51611.svg?style=flat" alt="Buy me a coffee"></a> <a href="https://polar.sh/pboling"><img src="https://img.shields.io/badge/polar-donate-a51611.svg?style=flat" alt="Donate on Polar"></a> <a href="https://ko-fi.com/pboling"><img src="https://img.shields.io/badge/ko--fi-%E2%9C%93-a51611.svg?style=flat" alt="Donate to my FLOSS efforts at ko-fi.com"></a> <a href="https://patreon.com/galtzo"><img src="https://img.shields.io/badge/patreon-donate-a51611.svg?style=flat" alt="Donate to my FLOSS efforts using Patreon"></a></p>
 
 <h2 id="-security">🔐 Security</h2>
 
@@ -625,9 +647,11 @@ Please consider sponsoring me or the project.</p>
 
 <p>To say “thanks!” ☝️ Join the Discord or 👇️ send money.</p>
 
-<p><a href="https://github.com/sponsors/pboling"><img src="https://img.shields.io/badge/Sponsor_Me!-pboling-blue?style=for-the-badge&amp;logo=github" alt="Sponsor me on GitHub Sponsors"></a> 💌 <a href="https://liberapay.com/pboling/donate"><img src="https://img.shields.io/liberapay/goal/pboling.svg?style=for-the-badge&amp;logo=liberapay&amp;color=a51611" alt="Sponsor me on Liberapay"></a> 💌 <a href="https://www.paypal.com/paypalme/peterboling"><img src="https://img.shields.io/badge/donate-paypal-a51611.svg?style=for-the-badge&amp;logo=paypal&amp;color=0A0A0A" alt="Donate on PayPal"></a></p>
+<p><a href="https://opencollective.com/ruby-oauth"><img src="https://img.shields.io/opencollective/all/ruby-oauth?style=for-the-badge" alt="Sponsor ruby-oauth/oauth2-mcp on Open Source Collective"></a> 💌 <a href="https://github.com/sponsors/pboling"><img src="https://img.shields.io/badge/Sponsor_Me!-pboling-blue?style=for-the-badge&amp;logo=github" alt="Sponsor me on GitHub Sponsors"></a> 💌 <a href="https://liberapay.com/pboling/donate"><img src="https://img.shields.io/liberapay/goal/pboling.svg?style=for-the-badge&amp;logo=liberapay&amp;color=a51611" alt="Sponsor me on Liberapay"></a> 💌 <a href="https://www.paypal.com/paypalme/peterboling"><img src="https://img.shields.io/badge/donate-paypal-a51611.svg?style=for-the-badge&amp;logo=paypal&amp;color=0A0A0A" alt="Donate on PayPal"></a></p>
 
 <h3 id="please-give-the-project-a-star--">Please give the project a star ⭐ ♥.</h3>
+
+<p>Many parts of this project are actively managed by a <a href="https://github.com/structuredmerge/structuredmerge-ruby/tree/main/gems/kettle-jem">kettle-jem</a> smart template utilizing <a href="https://structuredmerge.org">StructuredMerge.org</a> merge contracts.</p>
 
 <p>Thanks for RTFM. ☺️</p>
 
@@ -635,16 +659,16 @@ Please consider sponsoring me or the project.</p>
 <p>| Field | Value |<br>
 |—|—|<br>
 | Package | oauth2-mcp |<br>
-| Description | 🔮 oauth2-mcp provides Ruby helpers for securing HTTP Model Context Protocol servers with OAuth protected-resource metadata, bearer challenges, and scoped authorization. |<br>
+| Description | 🍲 oauth2-mcp provides Ruby helpers for securing HTTP Model Context Protocol servers with OAuth protected-resource metadata, bearer challenges, and scoped authorization. |<br>
 | Homepage | https://github.com/ruby-oauth/oauth2-mcp |<br>
 | Source | https://github.com/ruby-oauth/oauth2-mcp/tree/v0.1.0 |<br>
 | License | <code>MIT</code> |<br>
-| Funding | https://github.com/sponsors/pboling, https://issuehunt.io/u/pboling, https://ko-fi.com/pboling, https://liberapay.com/pboling/donate, https://patreon.com/galtzo, https://polar.sh/pboling, https://thanks.dev/u/gh/pboling, https://tidelift.com/funding/github/rubygems/oauth2-mcp, https://www.buymeacoffee.com/pboling |<br>
+| Funding | https://github.com/sponsors/pboling, https://issuehunt.io/u/pboling, https://ko-fi.com/pboling, https://liberapay.com/pboling/donate, https://opencollective.com/ruby-oauth, https://patreon.com/galtzo, https://polar.sh/pboling, https://thanks.dev/u/gh/pboling, https://tidelift.com/funding/github/rubygems/oauth2-mcp, https://www.buymeacoffee.com/pboling |<br>
 <!-- kettle-jem:metadata:end --></p>
 </div></div>
 
       <div id="footer">
-  Generated on Sun May 31 13:20:38 2026 by
+  Generated on Sat Jun  6 21:54:33 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.44 (ruby-4.0.5).
 </div>
