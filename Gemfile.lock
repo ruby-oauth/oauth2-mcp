@@ -22,8 +22,8 @@ GEM
       rubocop (>= 1.0)
       version_gem (~> 1.1, >= 1.1.10)
     ast (2.4.3)
-    auth-sanitizer (0.2.0)
-      version_gem (~> 1.1, >= 1.1.9)
+    auth-sanitizer (0.2.1)
+      version_gem (~> 1.1, >= 1.1.10)
     backports (3.25.3)
     base64 (0.3.0)
     benchmark (0.5.0)
@@ -436,7 +436,7 @@ CHECKSUMS
   appraisal2 (3.1.0) sha256=79e0335331b8604ee417bb71cef74c91e1c4ad3d41e1c77804b879684b572240
   appraisal2-rubocop (0.1.0) sha256=2d3b4100bc8c88f57e199ca0ced4d7a465326f693761474d10cb6eafe69c9148
   ast (2.4.3) sha256=954615157c1d6a382bc27d690d973195e79db7f55e9765ac7c481c60bdb4d383
-  auth-sanitizer (0.2.0) sha256=3b9763c1156546a5982d5d71a7904fb292a14ca2b9bd3f959061f22d732b60a0
+  auth-sanitizer (0.2.1) sha256=917dcf01f7589b06c26726afe90568cf2fb29d37a1f94facfc664f11967cc577
   backports (3.25.3) sha256=94298d32dc3c40ca15633b54e282780b49e2db0c045f602ea1907e4f63a17235
   base64 (0.3.0) sha256=27337aeabad6ffae05c265c450490628ef3ebd4b67be58257393227588f5a97b
   benchmark (0.5.0) sha256=465df122341aedcb81a2a24b4d3bd19b6c67c1530713fd533f3ff034e419236c

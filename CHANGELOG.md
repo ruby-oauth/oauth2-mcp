@@ -28,7 +28,7 @@ Please file a bug if you notice a violation of semantic versioning.
   and development dependency floors from the current kettle-jem template.
 - Updated generated OpenCollective funding metadata to use the
   `ruby-oauth` collective.
-- Updated the locked `auth-sanitizer` runtime dependency to v0.2.0.
+- Updated the locked `auth-sanitizer` runtime dependency to v0.2.1.
 
 ### Deprecated
 
