@@ -38,6 +38,7 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
+- Restored `docs/CNAME` so the generated documentation site keeps its custom domain.
 - Fixed generated documentation URLs that incorrectly pointed at a monorepo
   `gems/oauth2-mcp` path.
 
