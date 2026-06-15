@@ -1,7 +1,5 @@
 module OAuth2
   module MCP
-    VERSION: String
-
     class Error < StandardError
     end
 

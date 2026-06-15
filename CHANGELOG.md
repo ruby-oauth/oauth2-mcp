@@ -22,10 +22,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Changed
 
-- Raised generated `version_gem` and `appraisal2` dependency floors to
-  `version_gem` >= 1.1.10 and `appraisal2` >= 3.0.9.
 - Refreshed generated package metadata, support documentation, CI workflows,
-  and development dependency floors from the current kettle-jem template.
+  `version_gem` >= 1.1.12, `appraisal2` >= 3.1.2, `nomono` >= 1.0.4, and
+  development dependency floors from the current kettle-jem template.
 - Updated generated OpenCollective funding metadata to use the
   `ruby-oauth` collective.
 - Raised the runtime dependency floor for `oauth2` to `>= 2.0.21`.
