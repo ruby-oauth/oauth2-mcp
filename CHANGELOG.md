@@ -22,6 +22,23 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Changed
 
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.1.1] - 2026-06-15
+
+- TAG: [v0.1.1][0.1.1t]
+- COVERAGE: 100.00% -- 285/285 lines in 2 files
+- BRANCH COVERAGE: 100.00% -- 82/82 branches in 2 files
+- 67.05% documented
+
+### Changed
+
 - Refreshed generated package metadata, support documentation, CI workflows,
   `version_gem` >= 1.1.12, `appraisal2` >= 3.1.2, `nomono` >= 1.0.4, and
   development dependency floors from the current kettle-jem template.
@@ -33,17 +50,11 @@ Please file a bug if you notice a violation of semantic versioning.
 - Updated generated documentation dependency metadata to require
   `yaml-converter` >= 0.2.1.
 
-### Deprecated
-
-### Removed
-
 ### Fixed
 
 - Restored `docs/CNAME` so the generated documentation site keeps its custom domain.
 - Fixed generated documentation URLs that incorrectly pointed at a monorepo
   `gems/oauth2-mcp` path.
-
-### Security
 
 ## [0.1.0] - 2026-05-28
 
@@ -58,6 +69,8 @@ Please file a bug if you notice a violation of semantic versioning.
 - Treated unsupported OAuth introspection response shapes as inactive tokens
   instead of allowing low-level indexing errors to escape.
 
-[Unreleased]: https://github.com/ruby-oauth/oauth2-mcp/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/ruby-oauth/oauth2-mcp/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/ruby-oauth/oauth2-mcp/compare/v0.1.0...v0.1.1
+[0.1.1t]: https://github.com/ruby-oauth/oauth2-mcp/releases/tag/v0.1.1
 [0.1.0]: https://github.com/ruby-oauth/oauth2-mcp/compare/03b55e60f4a464acdaa9ebd4e29556579055f102...v0.1.0
 [0.1.0t]: https://github.com/ruby-oauth/oauth2-mcp/releases/tag/v0.1.0
