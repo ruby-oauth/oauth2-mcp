@@ -30,6 +30,8 @@ Please file a bug if you notice a violation of semantic versioning.
 - Raised the runtime dependency floor for `oauth2` to `>= 2.0.21`.
 - Updated the locked `auth-sanitizer` runtime dependency to v0.2.1.
 - Updated the locked `snaky_hash` runtime dependency to v2.0.5.
+- Updated generated documentation dependency metadata to require
+  `yaml-converter` >= 0.2.1.
 
 ### Deprecated
 
