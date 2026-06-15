@@ -3,7 +3,7 @@ PATH
   specs:
     oauth2-mcp (0.1.1)
       jwt (>= 2.7, < 4.0)
-      oauth2 (~> 2.0, >= 2.0.21)
+      oauth2 (~> 2.0, >= 2.0.23)
       version_gem (~> 1.1, >= 1.1.12)
 
 GEM
