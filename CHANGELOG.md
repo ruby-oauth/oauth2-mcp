@@ -37,6 +37,8 @@ Please file a bug if you notice a violation of semantic versioning.
 - Corrected persisted Open Collective metadata to use the `ruby-oauth`
   collective.
 
+- Package configured license files in gem release file lists.
+
 ### Security
 
 ## [0.1.1] - 2026-06-15
