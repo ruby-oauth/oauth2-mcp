@@ -20,16 +20,31 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Added
 
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.1.2] - 2026-07-14
+
+- TAG: [v0.1.2][0.1.2t]
+- COVERAGE: 100.00% -- 285/285 lines in 2 files
+- BRANCH COVERAGE: 100.00% -- 82/82 branches in 2 files
+- 67.05% documented
+
+### Added
+
 - Added support for JRuby 10.1 and TruffleRuby 34.0.
 
 ### Changed
 
 - Retemplated generated project metadata, support documentation, CI workflows,
   binstubs, and development dependency floors with `kettle-jem` v7.0.0.
-
-### Deprecated
-
-### Removed
 
 ### Fixed
 
@@ -38,8 +53,6 @@ Please file a bug if you notice a violation of semantic versioning.
   collective.
 
 - Package configured license files in gem release file lists.
-
-### Security
 
 ## [0.1.1] - 2026-06-15
 
@@ -80,7 +93,9 @@ Please file a bug if you notice a violation of semantic versioning.
 - Treated unsupported OAuth introspection response shapes as inactive tokens
   instead of allowing low-level indexing errors to escape.
 
-[Unreleased]: https://github.com/ruby-oauth/oauth2-mcp/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/ruby-oauth/oauth2-mcp/compare/v0.1.2...HEAD
+[0.1.2]: https://github.com/ruby-oauth/oauth2-mcp/compare/v0.1.1...v0.1.2
+[0.1.2t]: https://github.com/ruby-oauth/oauth2-mcp/releases/tag/v0.1.2
 [0.1.1]: https://github.com/ruby-oauth/oauth2-mcp/compare/v0.1.0...v0.1.1
 [0.1.1t]: https://github.com/ruby-oauth/oauth2-mcp/releases/tag/v0.1.1
 [0.1.0]: https://github.com/ruby-oauth/oauth2-mcp/compare/03b55e60f4a464acdaa9ebd4e29556579055f102...v0.1.0
