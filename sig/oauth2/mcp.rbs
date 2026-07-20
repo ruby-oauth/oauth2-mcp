@@ -195,5 +195,10 @@ module OAuth2
 
       def to_header: () -> String
     end
+
+    module Version
+      VERSION: String
+    end
+    VERSION: String
   end
 end
