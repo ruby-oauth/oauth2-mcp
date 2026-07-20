@@ -3,7 +3,7 @@
 module OAuth2
   module MCP
     module Version
-      VERSION = "0.1.2"
+      VERSION = "0.1.3"
     end
     VERSION = Version::VERSION # Traditional Constant Location
   end
