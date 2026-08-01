@@ -1,4 +1,7 @@
 {
+  "spec/oauth2/mcp/version_spec.rb:3120342248": [
+    [4, 1, 35, "RSpec/SpecFilePathFormat: Spec path should end with `o_auth2/mcp/version*_spec.rb`.", 3718626176]
+  ],
   "spec/oauth2/mcp_spec.rb:1025846544": [
     [3, 1, 26, "RSpec/MultipleDescribes: Do not use multiple top-level example groups - try to nest them.", 2274836666]
   ]
