@@ -7,7 +7,6 @@ require "uri"
 
 require "jwt"
 require "oauth2"
-
 require_relative "mcp/version"
 
 module OAuth2
