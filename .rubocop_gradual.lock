@@ -1,8 +1,8 @@
 {
-  "gemfiles/modular/templating.gemfile:3018447732": [
-    [14, 3, 47, "Bundler/DuplicatedGem: Gem `tree_sitter_language_pack` requirements already given on line 10 of the Gemfile.", 3843603197]
+  "gemfiles/modular/style_local.gemfile:2349284340": [
+    [71, 23, 20, "Style/SafeNavigation: Use safe navigation (`&.`) instead of checking if an object exists before calling the method.", 1851388465]
   ],
-  "spec/oauth2/mcp/version_spec.rb:3534307787": [
+  "spec/oauth2/mcp/version_spec.rb:2389745270": [
     [5, 1, 35, "RSpec/SpecFilePathFormat: Spec path should end with `o_auth2/mcp/version*_spec.rb`.", 3718626176]
   ],
   "spec/oauth2/mcp_spec.rb:1025846544": [

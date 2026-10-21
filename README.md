@@ -46,7 +46,7 @@ claims and mapped capabilities, not the raw bearer token.
 | Tokens to Remember | [![Gem name][⛳️name-img]][⛳️gem-name] [![Gem namespace][⛳️namespace-img]][⛳️gem-namespace] |
 |-------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Works with JRuby | [![JRuby 10.0 Compat][💎jruby-10.0i]][🚎jruby-10.0-wf] [![JRuby current Compat][💎jruby-c-i]][🚎10-j-wf] [![JRuby HEAD Compat][💎jruby-headi]][🚎3-hd-wf]|
-| Works with Truffle Ruby | [![Truffle Ruby 24.2 Compat][💎truby-24.2i]][🚎truby-24.2-wf] [![Truffle Ruby 25.0 Compat][💎truby-25.0i]][🚎truby-25.0-wf] [![Truffle Ruby 33.0 Compat][💎truby-33.0i]][🚎truby-33.0-wf] [![Truffle Ruby current Compat][💎truby-c-i]][🚎9-t-wf] [![Truffle Ruby HEAD Compat][💎truby-headi]][🚎3-hd-wf]|
+| Works with Truffle Ruby | [![Truffle Ruby 24.2 Compat][💎truby-24.2i]][🚎truby-24.2-wf] [![Truffle Ruby 25.0 Compat][💎truby-25.0i]][🚎truby-25.0-wf] [![Truffle Ruby 33.0 Compat][💎truby-33.0i]][🚎truby-33.0-wf] [![Truffle Ruby current Compat][💎truby-c-i]][🚎9-t-wf]|
 | Works with MRI Ruby 4 | [![Ruby current Compat][💎ruby-c-i]][🚎11-c-wf] [![Ruby HEAD Compat][💎ruby-headi]][🚎3-hd-wf]|
 | Works with MRI Ruby 3 | [![Ruby 3.2 Compat][💎ruby-3.2i]][🚎ruby-3.2-wf] [![Ruby 3.3 Compat][💎ruby-3.3i]][🚎ruby-3.3-wf] [![Ruby 3.4 Compat][💎ruby-3.4i]][🚎ruby-3.4-wf]|
 | Support & Community | [![Join Me on Daily.dev's RubyFriends][✉️ruby-friends-img]][✉️ruby-friends] [![Get help from RubyForum][✉️ruby-forum-img]][✉️ruby-forum] [![Live Chat on Discord][✉️discord-invite-img-ftb]][✉️discord-invite] [![Get help from me on Upwork][👨🏼‍🏫expsup-upwork-img]][👨🏼‍🏫expsup-upwork] [![Get help from me on Codementor][👨🏼‍🏫expsup-codementor-img]][👨🏼‍🏫expsup-codementor] |
@@ -59,7 +59,7 @@ claims and mapped capabilities, not the raw bearer token.
 
 ### Compatibility
 
-Compatible with MRI Ruby 3.2.0+, and concordant releases of JRuby, and TruffleRuby.
+Compatible with MRI Ruby 3.2.0+, JRuby, and TruffleRuby.
 CI workflows and Appraisals are generated for MRI Ruby 3.2.0+.
 This test floor is configured by `ruby.test_minimum` in `.kettle-jem.yml` and
 may be higher than the gem's runtime compatibility floor when legacy Rubies are
@@ -85,6 +85,23 @@ The _amazing_ test matrix is powered by the kettle-dev stack.
 
 </details>
 
+### Runtime and Platform Support
+
+Support tiers describe what this project's CI actually exercises, not what may
+work in an untested environment:
+
+- **Parallel support**: CI runs the test suite with multiple workers available.
+- **Unsupported**: the engine/platform combination is not covered by CI and is
+ not a project compatibility claim.
+
+| Ruby engine/version | Linux | macOS | Windows | Notes |
+|---------------------|-------|-------|---------|-------|
+| MRI 3.2-3.4 | Parallel support | Unsupported | Unsupported | Versioned Ruby workflows run on Linux. |
+| MRI current | Parallel support | Parallel support | Unsupported | Current Ruby workflow covers the declared OS platforms. |
+| MRI head | Parallel support | Unsupported | Unsupported | CI is allowed to fail while Ruby is in development. |
+| JRuby (all CI lanes) | Parallel support | Unsupported | Unsupported | Engine workflows run on Linux; macOS and Windows are not exercised by CI. |
+| TruffleRuby (all CI lanes) | Parallel support | Unsupported | Unsupported | Never shipped a Windows build (zero Windows assets across 66 releases scanned 2026-10-10); setup-ruby hard-fails ([source](https://github.com/ruby/setup-ruby/blob/master/README.md)) |
+
 ### Federated DVCS
 
 <details markdown="1">
@@ -98,7 +115,9 @@ The _amazing_ test matrix is powered by the kettle-dev stack.
 
 </details>
 
-### Enterprise Support [![Tidelift](https://tidelift.com/badges/package/rubygems/oauth2-mcp)](https://tidelift.com/subscription/pkg/rubygems-oauth2-mcp?utm_source=rubygems-oauth2-mcp&utm_medium=referral&utm_campaign=readme)
+### Enterprise Support
+
+[![Tidelift](https://tidelift.com/badges/package/rubygems/oauth2-mcp)](https://tidelift.com/subscription/pkg/rubygems-oauth2-mcp?utm_source=rubygems-oauth2-mcp&utm_medium=referral&utm_campaign=readme)
 
 Available as part of the Tidelift Subscription.
 
@@ -355,8 +374,7 @@ See [SECURITY.md][🔐security].
 ## 🤝 Contributing
 
 If you need some ideas of where to help, you could work on adding more code coverage,
-or if it is already 💯 (see [below](#code-coverage)) check [issues][🤝gh-issues] or [PRs][🤝gh-pulls],
-or use the gem and think about how it could be better.
+check [issues][🤝gh-issues] or [PRs][🤝gh-pulls], or use the gem and think about how it could be better.
 
 We [![Keep A Changelog][📗keep-changelog-img]][📗keep-changelog] so if you make changes, remember to update it.
 
@@ -391,19 +409,6 @@ chat rooms and mailing lists agrees to follow the [![Contributor Covenant 2.1][�
 Made with [contributors-img][🖐contrib-rocks].
 
 Also see GitLab Contributors: [https://gitlab.com/ruby-oauth/oauth2-mcp/-/graphs/main][🚎contributors-gl]
-
-<details markdown="1">
- <summary>⭐️ Star History</summary>
-
-<a href="https://star-history.com/ruby-oauth/oauth2-mcp&Date">
- <picture>
- <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=ruby-oauth/oauth2-mcp&type=Date&theme=dark" />
- <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=ruby-oauth/oauth2-mcp&type=Date" />
- <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=ruby-oauth/oauth2-mcp&type=Date" />
- </picture>
-</a>
-
-</details>
 
 ## 📌 Versioning
 
@@ -606,7 +611,6 @@ Thanks for RTFM. ☺️
 [💎truby-25.0i]: https://img.shields.io/badge/Truffle_Ruby-25.0-34BCB1?style=for-the-badge&logo=ruby&logoColor=pink
 [💎truby-33.0i]: https://img.shields.io/badge/Truffle_Ruby-33.0-34BCB1?style=for-the-badge&logo=ruby&logoColor=pink
 [💎truby-c-i]: https://img.shields.io/badge/Truffle_Ruby-current-34BCB1?style=for-the-badge&logo=ruby&logoColor=green
-[💎truby-headi]: https://img.shields.io/badge/Truffle_Ruby-HEAD-34BCB1?style=for-the-badge&logo=ruby&logoColor=blue
 [💎jruby-10.0i]: https://img.shields.io/badge/JRuby-10.0-FBE742?style=for-the-badge&logo=ruby&logoColor=red
 [💎jruby-c-i]: https://img.shields.io/badge/JRuby-current-FBE742?style=for-the-badge&logo=ruby&logoColor=green
 [💎jruby-headi]: https://img.shields.io/badge/JRuby-HEAD-FBE742?style=for-the-badge&logo=ruby&logoColor=blue
