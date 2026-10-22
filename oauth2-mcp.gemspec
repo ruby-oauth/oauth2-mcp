@@ -12,8 +12,8 @@ Gem::Specification.new do |spec|
   spec.authors = ["Peter H. Boling"]
   spec.email = ["floss@galtzo.com"]
 
-  spec.summary = "🍲 OAuth 2.1 resource-server helpers for MCP servers."
-  spec.description = "🍲 oauth2-mcp provides Ruby helpers for securing HTTP Model Context Protocol servers " \
+  spec.summary = "🛰️ OAuth 2.1 resource-server helpers for MCP servers."
+  spec.description = "🛰️ oauth2-mcp provides Ruby helpers for securing HTTP Model Context Protocol servers " \
     "with OAuth protected-resource metadata, bearer challenges, and scoped authorization."
   spec.homepage = "https://github.com/ruby-oauth/oauth2-mcp"
   spec.licenses = ["MIT"]
@@ -114,7 +114,7 @@ Gem::Specification.new do |spec|
   #       and preferably a modular one (see gemfiles/modular/*.gemfile).
 
   # Dev, Test, & Release Tasks
-  spec.add_development_dependency("kettle-dev", "~> 3.1", ">= 3.1.20")             # ruby >= 3.2.0
+  spec.add_development_dependency("kettle-dev", "~> 3.1", ">= 3.1.21")             # ruby >= 3.2.0
 
   # Security
   spec.add_development_dependency("bundler-audit", "~> 0.9.3")                      # ruby >= 2.0.0
