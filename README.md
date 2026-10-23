@@ -670,7 +670,7 @@ Thanks for RTFM. ☺️
 | Field | Value |
 |---|---|
 | Package | oauth2-mcp |
-| Description | 🍲 oauth2-mcp provides Ruby helpers for securing HTTP Model Context Protocol servers with OAuth protected-resource metadata, bearer challenges, and scoped authorization. |
+| Description | 🛰️ oauth2-mcp provides Ruby helpers for securing HTTP Model Context Protocol servers with OAuth protected-resource metadata, bearer challenges, and scoped authorization. |
 | Homepage | https://github.com/ruby-oauth/oauth2-mcp |
 | Source | https://github.com/ruby-oauth/oauth2-mcp |
 | License | `MIT` |
