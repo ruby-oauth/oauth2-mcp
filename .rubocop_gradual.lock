@@ -1,7 +1,4 @@
 {
-  "gemfiles/modular/style_local.gemfile:2466659765": [
-    [71, 23, 20, "Style/SafeNavigation: Use safe navigation (`&.`) instead of checking if an object exists before calling the method.", 1851388465]
-  ],
   "spec/oauth2/mcp/version_spec.rb:2389745270": [
     [5, 1, 35, "RSpec/SpecFilePathFormat: Spec path should end with `o_auth2/mcp/version*_spec.rb`.", 3718626176]
   ],
